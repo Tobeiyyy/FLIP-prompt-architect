@@ -60,6 +60,8 @@ Full, unedited session transcripts live in [`examples/`](examples/):
 
 **[Impossible request → honest refusal](examples/03-impossible-request.md)**: "Current stock prices, but with web search and all tools turned off." The framework names the contradiction first, explains why no prompt can bridge it, and pushes back on the constraint rather than the goal: three alternatives, each keeping a different part of the original request.
 
+**[Building an assistant](examples/04-assistant-build.md) → [the interview gets inherited](examples/05-inherited-interview.md)**: a two-part pair. Part one is the build session: one sentence becomes a two-component interview coach whose system prompt carries the framework's own gated interview, rewritten for its domain. Part two is that deliverable running in a fresh project with no access to the framework: it profiles its user behind the same readiness gates, mines details out of lazy one-line answers, and flips into a pressuring mock-interviewer persona mid-session without losing the profile. The interview logic travels inside the deliverable.
+
 More use-case examples are being added to the folder over time.
 
 ## Validation
