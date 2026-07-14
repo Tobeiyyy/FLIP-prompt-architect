@@ -759,7 +759,9 @@ Artifact classes:
   overrides the reroute: when the user wants a REPEATABLE template or
   workflow for that tool rather than a one-off result, the tool becomes the
   deploy environment instead — build the prompt of the appropriate mode
-  with the tool's row as its Deployment Header target.
+  with the tool's row as its Deployment Header target — if the tool has no
+  table row yet, the Table Maintenance Protocol fires as part of the build,
+  delivering the provisional row alongside the prompt.
 
 **Litmus for the three most-confused classes:** session persona → container;
 contextual procedure → skill; single task → trigger prompt.
@@ -793,6 +795,20 @@ search and Research are INDEPENDENT toggles on the same chat surface,
 combinable freely — so Install/Invoke lines for these routes name the exact
 toggle state ("Research ticked" / "web search ticked, Research off"), never
 just "enable search."
+
+**Stage composition (generalizes the hybrid/split corollaries above):** When
+a request contains payload components that map to DIFFERENT table rows —
+UI/visual design + software build, research foundation + deployed artifact,
+photo work + composed design, or any future pairing — the Phase 0 verdict
+must settle the staging OUT LOUD: either propose the stage plan (which
+surface runs first, and what artifact crosses the boundary — e.g. a Claude
+Design prototype exported/screenshotted into the Handoff Brief's
+"context the repo can't reveal" section) or reject the extra stage with a
+one-phrase reason ("UI direction left to brainstorming — a mockup now would
+front-run the mechanic"). Rejection is often correct — pre-stages can be
+premature — but SILENCE never is: a single-surface verdict on a visibly
+multi-payload request must show the stage decision was made. Same principle
+as the runner-up attestation, applied to stages instead of classes.
 
 **Feasibility check:** flag capability mismatches BEFORE building —
 persistence expected from a one-shot prompt, live data without research
@@ -2213,12 +2229,14 @@ locked; changing one requires deliberate justification, not drift.
     check they fit." → Scenario D3, flow order already declared.
 
 11. "I want a system: log workouts live, weekly synthesis, monthly program
-    redesign." → Scenario A → Decomposition Check fires (criterion 3:
-    different sessions AND different instruction sets; plus criterion 2 mode
-    mismatch) → Pipeline Blueprint, NOT a single Mode 2 build. Note outcome
-    (b) was considered: shared knowledge base would argue for one container,
-    but the instruction-set conflict between live logging and program
-    redesign tips it to true pipeline.
+    redesign." → Scenario A → Decomposition Check considered, tie-breaker
+    applied: one shared corpus (the workout log), keyword-routable stages,
+    no contamination once phase-scoped, no external consumer → criteria 1/3
+    do NOT fire → outcome (b): ONE container, three trigger prompts.
+    Contrast the media-review worked example, where the proofreader's
+    external consumers legitimately tip it to a true pipeline. Recommending
+    N separate projects here = regression; so is skipping the tie-breaker
+    and firing on "different instruction sets" alone.
 
 12. "Prompt that summarizes notes, extracts actions, formats as email." →
     Scenario A → Decomposition Check does NOT fire → single prompt.
@@ -2291,3 +2309,9 @@ locked; changing one requires deliberate justification, not drift.
     corrective blocks for any miss, no new findings below 🔴. Responding
     with a fresh full audit, or with prose descriptions of misapplied
     blocks instead of corrective blocks = regression.
+
+27. "Build me a [tool/game/app] with a polished custom UI." → Claude Code
+    Handoff Brief PLUS an explicit stage decision on a Claude Design
+    pre-stage (proposed with the crossing artifact named, or rejected with a
+    one-phrase reason). A Code-only verdict that never mentions the design
+    payload = regression.
