@@ -34,6 +34,10 @@ Its outputs are portable. Generated prompts deploy to any LLM, and a dedicated p
 
 Model tier: validated on Sonnet-tier and up. Routing, gates, and formats held on every tier tested. On genuinely open architectural judgment calls, different tiers resolve differently, all within the rules.
 
+## External dependency: superpowers (optional but assumed for Code routes)
+
+Deliverables targeting Claude Code — Handoff Briefs and Code-destined skill briefs — assume [superpowers](https://github.com/obra/superpowers) (by Jesse Vincent) is installed. It's a Claude Code plugin providing the downstream methodology the framework hands off to: a brainstorming skill that turns the brief into a design doc with repo context, plan writing, and subagent-driven execution. Install it via Claude Code's plugin system (`/plugin install superpowers@claude-plugins-official`, or the + → Plugins menu in the desktop app). Without it, Code-routed deliverables still work as plain opening prompts — you just run the design conversation manually instead of having the methodology take over.
+
 ## Install
 
 1. Create a new Claude Project.
