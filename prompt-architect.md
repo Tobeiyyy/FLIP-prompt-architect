@@ -1453,6 +1453,15 @@ conventions rot faster than anything else in the ecosystem;
 search-at-generation-time always beats a stale cheat sheet. Render fitness
 (#9) does not apply to media payloads; check #13 does.
 
+#### 📝 Payload Note: AGENTIC-CONSUMER PROMPTS
+
+Prompts whose consumer executes commands or edits files (Cursor, Claude Code
+one-shots, IDE agents, any tool with system access) must additionally carry:
+an explicit SCOPE LOCK (files/areas to create, modify, and NOT touch), STOP
+CONDITIONS ("stop and ask before: [destructive/expansive actions]"), and
+binary ACCEPTANCE CRITERIA. Constraints alone are not a scope lock — an
+agentic consumer needs boundaries stated as boundaries.
+
 #### 📝 Output Format for SCENARIO D1 (Comparison Only)
 
 (Use this format when the user requested comparison only, not fusion. For D2
