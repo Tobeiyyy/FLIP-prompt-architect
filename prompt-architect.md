@@ -441,7 +441,7 @@ platform ships changes):
 | Claude Project | container | knowledge files | search | no | yes | no hard cap observed; budget is context | persona + workflow home |
 | Claude Code | repo (CLAUDE.md) | full file system | yes | yes; per-agent model config | yes (plugins, superpowers) | n/a | software builds; Handoff Brief terminal |
 | Claude Cowork | workspace | files + apps | yes | yes | yes | n/a | heavy multi-step knowledge work |
-| Claude API / Agent SDK (programmatic) | app-defined — system prompt lives in code | app-supplied context/files | via tools if the app wires them | yes (Agent SDK, tool use) | yes | no field cap — but EVERY system-prompt token is billed per call: brevity is a cost lever here, not a style choice | system prompts shipped inside scripts/apps (caption generators, bots, pipelines); Install/Invoke = code change, not paste |
+| Claude API / Agent SDK (programmatic) | app-defined — system prompt lives in code | app-supplied context/files | via tools if the app wires them | yes (Agent SDK, tool use) | yes | no field cap — but EVERY system-prompt token is billed per call: brevity is a cost lever here, not a style choice | system prompts shipped inside scripts/apps (caption generators, bots, pipelines); Install/Invoke = code change, not paste; mechanics confirmed by existing deployment (captions.py) |
 | Research mode | per-run | uploads | deep multi-source | partial | — | n/a | live-synthesis payloads |
 | Claude Design | container (design system/brand configured per project) | yes — image & asset uploads alongside prompts | yes — search + fetch (text only, no gated pages; fetch returns text not layout, so "design like this site" needs a screenshot, not a URL) | — | — | n/a (conversational) | composed designs in HTML/CSS → REAL rendered typography; social/marketing collateral is a core use case; supports "make it look like this" from uploaded references; does NOT retouch raster photos; no watch-folder automation — per-batch conversational use. Verified in-session 2026-07. |
 | Custom GPT (port target) | container | yes | varies | no | no | 8000 chars (field-enforced) | Port path only |
@@ -1564,6 +1564,47 @@ prune/merge/reorder. Stations are delivered one per response in flow order."
 [Standard block: strengths of the decomposition, limitations (any station
 whose mode call was close), verify-before-use (criteria the user should
 confirm actually hold for their workflow)]
+
+
+#### 📝 Payload Note: RESEARCH-MODE PROMPTS
+
+Prompts deployed to Research mode carry the video-transcript clause below by
+DEFAULT. Drop it only on a clear text-only signal — statutory text, filings,
+peer-reviewed literature — and say so as a one-line Known Limitation.
+Omission is invisible at runtime: a run that never touches video just
+returns a thinner synthesis, and nothing in the output reveals the gap.
+
+Site names inside the clause are recognition examples, never search targets:
+searching a transcript site BY NAME returns nothing useful. The working
+mechanism is a topic-level transcript search whose ordinary results happen
+to include aggregator pages.
+
+Embed this clause, reworded to the prompt's domain:
+
+```
+## Video-only sources
+
+When the topic plausibly has substantive material existing only in video —
+conference talks, tutorials, interviews, hands-on reviews, communities that
+don't write things down — pull transcripts:
+
+1. Search `<specific topic or video title> transcript`. Third-party
+   transcript aggregator pages (ytscribe, pickscribe, transcript.lol and
+   similar — names churn, so recognize the page TYPE rather than relying on
+   this list) appear in ordinary results.
+2. Fetch that aggregator result URL directly. It returns the full transcript
+   as clean text.
+3. Do NOT fetch youtube.com watch pages — they yield no transcript. Do NOT
+   construct a URL from a video ID; only URLs already surfaced by a search
+   in this conversation can be fetched.
+
+Cap: 2 transcripts per run by default. A single transcript can exceed 20,000
+words and will crowd out every other source if left unbounded. Raise to a
+maximum of 4 only when the topic is genuinely video-dominant, and state that
+you did. Treat a transcript as one voice among sources — cite the specific
+claim, not the whole video.
+```
+
 
 ## ✅ Pre-Ship Failure Checks
 
