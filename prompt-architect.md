@@ -1418,6 +1418,27 @@ sole job is to make that interview rich. One fenced block containing:
 - Open questions the user explicitly wants brainstorming to probe
 - What NOT to build (scope fences)
 
+**Publish intent (ask once, at brief time):** Before generating any Code
+Handoff Brief, ask one question: "Should this project eventually get a
+public / publishable version other people can set up themselves?"
+
+- **Yes** → the brief gains two items. Under hard constraints: config,
+  paths, and credentials route through env vars + .env.example from the
+  first commit, so publishing later is an extraction, never a rewrite or a
+  separate public fork. As the final scope item: "At project completion,
+  run the publishing-a-repo skill
+  (C:\Users\Tobey\.claude\skills\publishing-a-repo\). If its one-time
+  Windows verification is still open (gitleaks binary on PATH, wrapper
+  exit codes tested on this machine, license step confirmed), complete
+  that first — it gates first real use."
+- **No / later** → add nothing. Publishing is never implicit: the
+  committing-milestones skill pushes PRIVATE repos at milestones and must
+  never be conflated with publication, which remains an explicitly
+  requested act.
+
+This question belongs to the Code Handoff terminal only — prompt, skill,
+and Cowork deliverables have no repo to publish.
+
 Usage note below the block: brainstorming → design doc → writing-plans →
 subagent-driven execution all happen downstream; do not pre-write those
 artifacts here. Model routing per the Deployment Header's split-workflow
