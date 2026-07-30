@@ -1426,11 +1426,12 @@ public / publishable version other people can set up themselves?"
   paths, and credentials route through env vars + .env.example from the
   first commit, so publishing later is an extraction, never a rewrite or a
   separate public fork. As the final scope item: "At project completion,
-  run the publishing-a-repo skill
-  (C:\Users\Tobey\.claude\skills\publishing-a-repo\). If its one-time
-  Windows verification is still open (gitleaks binary on PATH, wrapper
-  exit codes tested on this machine, license step confirmed), complete
-  that first — it gates first real use."
+  run a publish-readiness pass before anything goes public: full-history
+  secret scan (e.g. gitleaks), config/paths confirmed extracted to env
+  vars + .env.example, license chosen, README covers setup from scratch.
+  If a repo-publishing skill is installed, it owns this pass — but verify
+  its scanner actually executes on this machine before trusting a green
+  result; an unverified wrapper gates first real use."
 - **No / later** → add nothing. Publishing is never implicit: the
   committing-milestones skill pushes PRIVATE repos at milestones and must
   never be conflated with publication, which remains an explicitly
