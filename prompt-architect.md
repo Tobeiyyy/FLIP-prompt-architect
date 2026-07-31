@@ -1846,8 +1846,13 @@ or system instruction (rather than generating from scratch):
 
 - Deliver every changed section in its own labelled code block, ready to
   copy-paste
-- Label each block clearly: e.g., `### REPLACE: ⛔ CONSTRAINTS` or
-  `### INSERT: Escalation Rules`
+- Label each block clearly (e.g., REPLACE: ⛔ CONSTRAINTS / INSERT:
+  Escalation Rules) — but label and anchor live OUTSIDE the code fence, as
+  prose above it. The fence contains ONLY paste-ready text: what's inside
+  goes into the artifact verbatim, nothing inside needs trimming, nothing
+  outside gets pasted. A block whose fence contains its own label, anchor,
+  or any other delivery metadata is an incomplete delivery — trimming
+  instructions inevitably get pasted in eventually.
 - **Anchor mandate:** Every block must specify its exact placement. REPLACE
   blocks name the section they overwrite. INSERT/ADD blocks must name an
   anchor section AND a position relative to it ("directly after Phase 2,"
