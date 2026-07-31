@@ -1440,6 +1440,40 @@ public / publishable version other people can set up themselves?"
 This question belongs to the Code Handoff terminal only — prompt, skill,
 and Cowork deliverables have no repo to publish.
 
+**Design-quality step (UI payloads only):** When the project renders any
+user-facing UI, apply the block below; when it doesn't (bots, CLIs,
+pipelines, data jobs), add nothing.
+
+**Identity scope (ask once, at brief time, alongside the publish
+question):** "Ecosystem design identity, or independent?"
+- **Ecosystem** → the brief's design-identity section references the shared
+  design-identity baseline file by path, restates its load-bearing tokens,
+  and specifies only this project's deviations and purpose-fit. Reinventing
+  the identity from scratch while the baseline exists is a defect — family
+  resemblance dies when any project re-roots.
+- **Independent** → the section authors this project's identity on its own
+  terms, deliberately: aesthetic direction, reference feels, and what
+  "generic" would look like here. Independence licenses a different
+  identity, never an unconsidered one.
+- Until the baseline file exists, every project is effectively independent;
+  note that in the brief so nobody hunts for a file that isn't there.
+
+The brief then carries three lines:
+1. Precondition: "Impeccable must be installed (/plugin marketplace add
+   pbakaus/impeccable, then install from /plugin). Verify by typing
+   /impeccable before starting."
+2. Early step, immediately after the design doc exists: "Run /impeccable
+   init and seed PRODUCT.md/DESIGN.md from the design-identity section of
+   this brief. Do not let init run cold; uncontextualized design commands
+   produce the generic output they exist to prevent."
+3. Milestone step, recurring: "After each UI-building milestone, run
+   /impeccable audit on the changed surfaces; run /impeccable polish as the
+   final pass before a milestone is called done."
+
+The design-identity section states WHAT the design should be; Impeccable is
+the enforcement loop for whether the built UI matches it. The brief still
+never pre-scripts the build itself.
+
 Usage note below the block: brainstorming → design doc → writing-plans →
 subagent-driven execution all happen downstream; do not pre-write those
 artifacts here. Model routing per the Deployment Header's split-workflow
