@@ -1,8 +1,30 @@
 # FLIP Prompt Architect
 
-A meta-prompt for Claude Projects that turns rough ideas into deployed AI systems. It interviews you first, routes to the right artifact class, and refuses to build the wrong thing.
+A Claude skill that turns rough ideas into deployed AI systems. It interviews you first, routes to the right artifact class, and refuses to build the wrong thing.
 
-Paste it into a Claude Project's instructions field, then describe what you want to achieve. The framework decides whether the answer is a one-shot prompt, a persistent assistant, a skill, a multi-prompt pipeline, a build brief for a coding agent, or nothing at all, because a tool you already have does it natively.
+Describe what you want to achieve. The framework decides whether the answer is a one-shot prompt, a persistent assistant, a skill, a multi-prompt pipeline, a build brief for a coding agent, or nothing at all, because a tool you already have does it natively.
+
+## This repo is a mirror
+
+The canonical copy of the framework lives as a skill file (`SKILL.md`). This repo mirrors it verbatim. All changes flow through the skill file — the repo is never edited directly. It exists so the framework can be cloned, forked, and referenced, but the source of truth is the installed skill.
+
+## Install
+
+### Claude.ai (Skills)
+
+1. Download or clone this repo.
+2. Go to **Settings → Capabilities/Skills** (or the equivalent skills UI).
+3. Upload the folder as a skill.
+
+### Claude Code
+
+Copy the folder into your skills directory:
+
+```bash
+cp -r FLIP-prompt-architect ~/.claude/skills/prompt-architect
+```
+
+The skill auto-triggers when you ask to build, write, improve, audit, fix, port, compare, or merge a prompt, system prompt, project instruction, skill, or AI workflow.
 
 ## Why this exists
 
@@ -25,24 +47,6 @@ Second, they only make prompts. Sometimes the right artifact is a skill that aut
 **Architectural pushback.** Ask it to merge two unrelated prompts and it refuses, with alternatives. Ask for three separate projects sharing the same files and it recommends one container with three triggers. Ask for "a prompt" to build software and it hands you a coding-agent brief. The terminal is chosen by the task, not by your phrasing.
 
 **Economy.** Every generated deliverable is held to a deletion test: a line whose removal changes no output gets cut. Comprehensive means complete logic. It does not mean padded prose.
-
-## Requirements and scope
-
-The framework runs on Claude (claude.ai Projects). It routes deeply into the Claude ecosystem (Projects, Claude Code, skills, Research mode, Claude Design) and assumes those terminals exist.
-
-Its outputs are portable. Generated prompts deploy to any LLM, and a dedicated port sub-path adapts existing prompts for other platforms like Gemini Gems and custom GPTs, including render fixes for fragile targets.
-
-Model tier: validated on Sonnet-tier and up. Routing, gates, and formats held on every tier tested. On genuinely open architectural judgment calls, different tiers resolve differently, all within the rules.
-
-## External dependency: superpowers (optional but assumed for Code routes)
-
-Deliverables targeting Claude Code - Handoff Briefs and Code-destined skill briefs - assume [superpowers](https://github.com/obra/superpowers) (by Jesse Vincent) is installed. It's a Claude Code plugin providing the downstream methodology the framework hands off to: a brainstorming skill that turns the brief into a design doc with repo context, plan writing, and subagent-driven execution. Install it via Claude Code's plugin system (`/plugin install superpowers@claude-plugins-official`, or the + → Plugins menu in the desktop app). Without it, Code-routed deliverables still work as plain opening prompts - you just run the design conversation manually instead of having the methodology take over.
-
-## Install
-
-1. Create a new Claude Project.
-2. Paste the full contents of `prompt-architect.md` into the Project's custom-instructions field.
-3. Open a chat in the project and describe your goal.
 
 ## How to use it well
 
@@ -68,6 +72,10 @@ Full, unedited session transcripts live in [`examples/`](examples/):
 
 More use-case examples are being added to the folder over time.
 
+## External dependency: superpowers (optional but assumed for Code routes)
+
+Deliverables targeting Claude Code — Handoff Briefs and Code-destined skill briefs — assume [superpowers](https://github.com/obra/superpowers) (by Jesse Vincent) is installed. It's a Claude Code plugin providing the downstream methodology the framework hands off to: a brainstorming skill that turns the brief into a design doc with repo context, plan writing, and subagent-driven execution. Install it via Claude Code's plugin system (`/plugin install superpowers@claude-plugins-official`, or the + → Plugins menu in the desktop app). Without it, Code-routed deliverables still work as plain opening prompts — you just run the design conversation manually instead of having the methodology take over.
+
 ## Validation
 
 This isn't shipped on vibes. The framework was regression-tested before publication.
@@ -78,7 +86,7 @@ Deployment mechanics were confirmed by completed deployments on every environmen
 
 Downstream execution was spot-checked rather than exhaustively session-tested. One generated assistant ran through full sessions in a clean context and held every embedded gate; the remaining test artifacts are format-verified. Per-deployment verification is deliberately the operator's job, which is why every deliverable ships with its own "Verify Before Use" section.
 
-A 26-input Golden Regression Set is embedded in the instructions themselves, with locked expected outcomes, so any edit you make can be checked for regressions.
+A 29-input Golden Regression Set is embedded in the skill file itself, with locked expected outcomes, so any edit you make can be checked for regressions.
 
 ## Known limitations
 
@@ -92,12 +100,18 @@ Rarely-triggered rules drift first. Checks that fire once in a hundred sessions 
 
 Account memory personalizes verdicts. Inside your own Claude account, project memory feeds the interview and can shift architecture choices toward your known context. That's legitimate behavior, but it means your results and a stranger's results can differ on the same input. Clean-context behavior was tested separately and is input-literal.
 
-It cannot verify what it cannot see. Skill triggering, connector availability, and platform field limits are checked empirically where possible and flagged as unverified where not. The Environment Capability Table inside the instructions is designed as a user-maintained measurement log. Entries marked untested are instructions to you, not oversights.
+It cannot verify what it cannot see. Skill triggering, connector availability, and platform field limits are checked empirically where possible and flagged as unverified where not. The Environment Capability Table inside the skill file is designed as a user-maintained measurement log. Entries marked untested are instructions to you, not oversights.
 
 ## Maintaining it
 
 The framework is built to be edited. The regression set locks expected routing, the version-stamped Interview Engine flags when downstream copies need re-syncing, and the failure-report protocol applies to the framework itself (its own strip-note ceremony was deleted mid-testing when it failed its own deletion test). If you change something, run the regression inputs.
 
+All edits happen on the canonical skill file. Update the repo by copying the new version of `SKILL.md` into the root and pushing.
+
 ## Feedback
 
 Issues and PRs welcome. The most useful things you can send: inputs that misroute, environments missing from the capability table, and cases where a generated deliverable failed downstream in a way the pre-ship checks should have caught.
+
+## License
+
+[MIT](LICENSE)
