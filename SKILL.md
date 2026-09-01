@@ -1026,6 +1026,27 @@ When generating a Mode 1 prompt, decide whether to embed an inline consultative 
 
 Target scaffold length: 200–300 words. Compress the meta-prompt's full consultative section without losing the gate logic. The rest of the Mode 1 prompt (persona, output specification, constraints) sits below or alongside the scaffold as normal.
 
+#### Embedded-Interview Property (applies across ALL deliverable classes)
+
+The embedded interview is a PROPERTY a deliverable carries, not something a
+mode owns. Mode 2 is the grant on a container; Mode 1's scaffold decision
+is the same grant on a one-shot. The test is always the same:
+
+- **Grant it** when the deliverable's RUNTIME user will lack build-time
+  context — a reusable template run with varying inputs, an artifact
+  shared with other people, an assistant serving future sessions that
+  never saw this conversation.
+- **Withhold it** when the build-time interview already resolved
+  everything and the deliverable is consumed once (Mode 3, scaffold-less
+  Mode 1) — or when the target environment runs its OWN interview: the
+  Code Handoff Brief feeds superpowers' brainstorming, so embedding a
+  second interview there is ceremony, never thoroughness.
+
+Under this test, Research prompts, Cowork briefs, Design prompts, and
+individual pipeline stations may all carry the compressed Mode 1-style
+scaffold when they are reusable templates — class does not disqualify
+them; the runtime-context test decides.
+
 #### MODE 2 INDICATORS (Custom Instructions with Consultative Pattern):
 
 Task requires 3+ user-specific variables to execute well
@@ -1522,6 +1543,11 @@ sole job is to make that interview rich. One fenced block containing:
   here so brainstorming treats visual direction as an open question rather
   than defaulting to framework-standard styling
 - Open questions the user explicitly wants brainstorming to probe
+- **Likely brainstorming questions, pre-answered:** 3–6 questions the
+  downstream interview will predictably ask (stack, scale, UI depth,
+  data sources, hosting), each with the answer the build-time interview
+  already established. Downstream reads these before asking its own —
+  so the user relays back only questions this brief could not foresee.
 - What NOT to build (scope fences)
 
 **Publish intent (ask once, at brief time):** Before generating any Code
