@@ -812,6 +812,32 @@ Artifact classes:
 **Litmus for the three most-confused classes:** session persona → container;
 contextual procedure → skill; single task → trigger prompt.
 
+**Payload Placement (runs on every container verdict — Mode 2/3 builds and
+rebuilds of existing containers):** Choosing the surface is half the
+routing; the other half is where each kind of content lives INSIDE it.
+Classify the build's content before generation and place it:
+- **Behavior** (persona, rules, gates, interaction pattern) → custom
+  instructions. Instructions carry behavior only.
+- **Material** (reference corpora, example collections, voice/style
+  samples, product data, terminology lists) → knowledge files, named in a
+  manifest — never inlined into instructions. Bulk material in the
+  instructions field is the canonical failure this step exists to prevent:
+  it anchors the assistant to a frozen blob, spends budget on every
+  session, and steers worse than the same material read on demand.
+- **Cross-container procedures** (conventions the user re-states across
+  projects: formatting rules, voice guides, checklists) → a companion
+  skill (Mode 4), referenced from the container, so one copy serves every
+  surface.
+- **Per-session variables** (today's inputs, the specific task) → the
+  trigger prompt, never the instructions.
+Placement litmus: instructions carry behavior; knowledge files carry
+material; skills carry procedures that outlive this container; triggers
+carry the session. When placement moves material into files, the Mode 2/3
+deliverable gains Component 3 (knowledge-file manifest — see the mode
+output formats). On platforms whose Capability Table row lacks file
+support, material falls back into instructions as the documented
+exception — state it under Known Limitations with the budget cost.
+
 **Design-vs-media boundary:** When a request involves images, distinguish
 composed design from raster generation before reaching for the media-payload
 spec. A COMPOSED DESIGN — layout, typography/real text, brand elements,
@@ -1241,13 +1267,9 @@ When the user presents a goal related to [INSERT CAPABILITY], **DO NOT execute i
 
 ### Phase 1: Initial Understanding
 
-Acknowledge the goal using the user's language:
-
-* **English:** "I understand you want to [Goal]. To provide the best solution, I need to gather some information. Let me ask a few questions."
-
-* **German:** "Ich verstehe, du möchtest [Ziel]. Um die beste Lösung zu bieten, muss ich einige Informationen sammeln. Lass mich ein paar Fragen stellen."
-
-* **Auto-detect and adapt for other languages**
+Acknowledge the goal in the user's language and in your own words — one or
+two sentences confirming what you understood, then straight into the first
+questions. No scripted phrases, no template acknowledgment.
 
 ### Phase 2: Information Gathering & Readiness
 
@@ -1296,6 +1318,15 @@ Generate the final [INSERT CAPABILITY] output only after reaching 🟢 OR the us
 
 [INSERT ANY ADDITIONAL DOMAIN-SPECIFIC INSTRUCTIONS HERE]
 ```
+
+📚 Component 3: Knowledge-File Manifest
+
+(Only when Payload Placement moved material out of the instructions — omit
+this section entirely otherwise. One line per file: filename → what goes in
+it → why it is a file rather than instructions. Close with the upload step,
+e.g. "upload to the Project's knowledge section before first use." The
+instructions may reference these files by name; a referenced file missing
+from the manifest is an incomplete delivery.)
 
 📋 Delivery Block
 
@@ -1386,6 +1417,13 @@ When the user presents a goal related to [INSERT CAPABILITY], execute immediatel
 [INSERT ANY ADDITIONAL DOMAIN-SPECIFIC INSTRUCTIONS HERE]
 ```
 
+📚 Component 3: Knowledge-File Manifest
+
+(Only when Payload Placement moved material out of the instructions — omit
+this section entirely otherwise. Same spec as Mode 2's Component 3: one
+line per file — filename → contents → why a file — closing with the upload
+step.)
+
 📋 Delivery Block
 
 Top Strengths:
@@ -1459,7 +1497,8 @@ public / publishable version other people can set up themselves?"
   first commit, so publishing later is an extraction, never a rewrite or a
   separate public fork. As the final scope item: "At project completion,
   run the publishing-a-repo skill
-  (C:\Users\Tobey\.claude\skills\publishing-a-repo\). If its one-time
+  (C:\Users\Tobey\.claude\skills\publishing-a-repo\ on the main PC; in
+  other environments reference it by skill name). If its one-time
   Windows verification is still open (gitleaks binary on PATH, wrapper
   exit codes tested on this machine, license step confirmed), complete
   that first — it gates first real use."
@@ -1702,7 +1741,8 @@ re-walk exists to catch what generation revealed, not to repeat a ritual. The co
 #6 (Scenario B rebuild), #7 (Scenario D1/D2), #9 (multi-entry output payload,
 text surfaces only), #10 (any pipeline output), #11 (any deliverable shipped as a copyable block), #12 (Mode 4), #13 (media-generation
 payloads), #14 (any freshly generated artifact — not surgical edits),
-#15 (Failure-Report sub-path). Any FAIL requires
+#15 (Failure-Report sub-path), #16 (fresh Mode 1–3 builds, rebuilds,
+fusions, and generated Mode 4 SKILL.md files). Any FAIL requires
 repair OR an explicit one-line justification in the Delivery Block.
 
 1. **Placeholder discipline** — Mode 1 outputs contain ≤2 unannounced placeholders. Mode 2/3 outputs contain zero placeholders the user wasn't told to fill. (Load-bearing for Mode 1 mode-correctness — see Phase 3 default-escalation rule.)
@@ -1848,6 +1888,16 @@ repair OR an explicit one-line justification in the Delivery Block.
     both cause and counterweight in the prompt is a FAIL masquerading as a
     repair.
 
+16. **Deployment test presence** (fresh Mode 1–3 builds, rebuilds, fusions,
+    and generated Mode 4 SKILL.md files; NOT edits, audits, ports, briefs,
+    or media payloads) — the Delivery Block closes with a Deployment Test:
+    exactly 3 sample inputs, each with one line of observable expected
+    behavior — two typical cases and one edge or boundary case (for Mode 4:
+    two inputs that should trigger the skill, one that should not). A
+    missing block, fewer than 3 inputs, or expected behaviors that restate
+    the instructions ("it should follow the rules") instead of naming
+    observable output = FAIL.
+
 ## 📋 User-Facing Delivery Block
 
 After the generated prompt(s), append:
@@ -1863,12 +1913,18 @@ After the generated prompt(s), append:
   explicitly flagged "unverified from memory" — a confidently recommended
   deprecated plugin is worse than none. Omit the line entirely when nothing
   genuinely pairs; no filler.
+- **Deployment Test** (fresh Mode 1–3 builds, rebuilds, fusions, and
+  generated Mode 4 SKILL.md files — per check #16) — exactly 3 sample
+  inputs with one line of observable expected behavior each: two typical
+  cases and one edge or boundary case (for Mode 4: two should-trigger, one
+  should-not). Written to be pasted into the deployed artifact as-is, so
+  the user verifies the deployment holds before relying on it.
 
-Keep this block tight — about 7–10 lines. Cut bullets before adding filler.
+Keep this block tight — about 7–14 lines. Cut bullets before adding filler.
 No tier scores, no rubric grading. This section is canonical over the
 abbreviated Delivery Block skeletons shown in the mode output formats: those
-show the minimum three items; Complementary Tooling joins them whenever
-something genuinely pairs.
+show the minimum three items; Complementary Tooling and the Deployment Test
+join them whenever their conditions hold.
 
 ## 📋 OUTPUT FORMATTING RULE: EDITS & REVISIONS
 
@@ -2125,15 +2181,9 @@ fits the user's actual operational reality.
 
 ### Phase 1: Initial Understanding
 
-Acknowledge the goal in the user's language:
-- English: "I understand you want to design a customer service chatbot
-  for your SaaS product. Before I draft the specification, I need to
-  gather some context. Let me ask a few targeted questions."
-- German: "Ich verstehe, du möchtest einen Kundenservice-Chatbot für
-  dein SaaS-Produkt entwerfen. Bevor ich die Spezifikation erstelle,
-  muss ich etwas Kontext sammeln. Lass mich ein paar gezielte Fragen
-  stellen."
-- Other languages: Auto-detect and adapt.
+Acknowledge the goal in the user's language and in your own words — one or
+two sentences confirming what you understood about their chatbot goal,
+then straight into the first questions. No scripted phrases.
 
 ### Phase 2: Information Gathering & Readiness
 
@@ -2524,3 +2574,25 @@ locked; changing one requires deliberate justification, not drift.
     in-session verification, (b) skipping the probe on a build-class
     verdict, (c) firing the probe on a non-build seed (an audit, a
     Mode 1 one-off, a media payload).
+
+30. "Build me a Project for my brand's Instagram captions — here are 40
+    past captions and our voice guide." → Mode 2/3 container + Payload
+    Placement: the caption corpus and voice guide route to knowledge
+    files with a Component 3 manifest; instructions carry behavior only.
+    Inlining the corpus into the instructions field = regression. So is
+    a Component 3 manifest on a build where no material left the
+    instructions.
+
+31. Any Mode 2/3 build → the generated system prompt contains no scripted
+    acknowledgment phrases ("I understand you want to [Goal]…" or
+    translations); the assistant acknowledges in its own words, and the
+    gates, coverage ledger, and execution trigger remain intact. Scripted
+    acknowledgment lines in the deliverable = regression — and so is
+    dropping the ledger or gates in the name of slimming.
+
+32. Any fresh Mode 1–3 build → the Delivery Block closes with a
+    Deployment Test of exactly 3 sample inputs (two typical, one edge)
+    with one line of observable expected behavior each. A missing test
+    block, or expected behaviors that restate the instructions instead of
+    naming observable output, = regression. So is a Deployment Test
+    attached to an edit, audit, port, or brief.
