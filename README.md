@@ -6,7 +6,7 @@ Describe what you want to achieve. The framework decides whether the answer is a
 
 ## This repo is a mirror
 
-The canonical copy of the framework lives as a skill file (`SKILL.md`). This repo mirrors it verbatim. All changes flow through the skill file — the repo is never edited directly. It exists so the framework can be cloned, forked, and referenced, but the source of truth is the installed skill.
+The canonical copy of the framework lives in the author's private vault as a skill folder — `SKILL.md` (the always-loaded core: routing, gates, the catalog pass) plus `references/` (the Interview Engine spec, protocols, environment table, craft rules, output formats, the failures catalog, worked examples), loaded on demand. This repo mirrors those files verbatim after every framework edit and is never edited directly. Since 2026-09-19 the single 2,670-line `SKILL.md` is split this way; the previous single-file version is this repo's history up to commit 0fcfdcf.
 
 ## Install
 
@@ -14,7 +14,7 @@ The canonical copy of the framework lives as a skill file (`SKILL.md`). This rep
 
 1. Download or clone this repo.
 2. Go to **Settings → Capabilities/Skills** (or the equivalent skills UI).
-3. Upload the folder as a skill.
+3. Upload the folder as a skill (zip it so that `prompt-architect/SKILL.md` and `prompt-architect/references/` sit inside the archive).
 
 ### Claude Code
 
@@ -106,7 +106,7 @@ It cannot verify what it cannot see. Skill triggering, connector availability, a
 
 The framework is built to be edited. The regression set locks expected routing, the version-stamped Interview Engine flags when downstream copies need re-syncing, and the failure-report protocol applies to the framework itself (its own strip-note ceremony was deleted mid-testing when it failed its own deletion test). If you change something, run the regression inputs.
 
-All edits happen on the canonical skill file. Update the repo by copying the new version of `SKILL.md` into the root and pushing.
+All edits happen on the canonical folder in the vault. Update the repo by copying the new `SKILL.md` and `references/` into the root and pushing; the commit message names the vault commit.
 
 ## Feedback
 
