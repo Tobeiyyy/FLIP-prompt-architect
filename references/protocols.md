@@ -43,6 +43,14 @@ INSTEAD of the full Scenario B audit (flag quality issues only if 🔴-severity)
    dependency needs a target-platform substitute or an explicit drop note.
 4. **Terminal behavior** — Trigger/system-prompt split conventions differ
    per platform; restate the pairing for the target's field names.
+5. **Claim-level check** — before declaring the port done, run ONE golden
+   input through source and target and compare the outputs claim by claim
+   (each atomic assertion: same / missing / extra / contradicted), not by
+   text similarity. A contradicted or missing load-bearing claim traces to
+   a prompt line that the target reads differently; harden that line.
+   Where the target cannot be run in-session, the Delivery Block names the
+   golden input and the claims to compare as the user's Verify Before Use.
+   (PromptKit prompt-portability-evaluation, MIT.)
 
 Deliver as EDITS & REVISIONS blocks against the original, or rebuild per the
 standard rebuild criteria if platform constraints force architectural change.
@@ -127,6 +135,44 @@ This is DIFF work, not audit work. Do not open new findings. Protocol:
   request): Use the **EDITS & REVISIONS Output Format** (references/output-formats.md) instead of
   generating a full new prompt — UNLESS the rebuild criteria below are met, in
   which case escalate to rebuild and tell the user why.
+
+### Audit method (every Scenario B audit and every D1 independent assessment)
+
+1. **Segment inventory first.** Split the pasted artifact into segments
+   S1…Sn (each heading, list block, rule, persona statement, freeform
+   paragraph) and classify each as persona · protocol · format · constraint
+   · example · dead (no behavioural effect). The inventory is the coverage
+   list for the review; a finding names its segment. (PromptKit
+   prompt-decomposition, MIT.)
+2. **Steelman before critique.** State the strongest reading of the
+   artifact — what it is trying to do and how it would succeed — then
+   critique that reading. An objection that only works against a weak
+   reading is not raised.
+3. **Falsify every finding.** Before a finding is reported, try to
+   disprove it: is there a line elsewhere that neutralises it, a
+   downstream convention that makes it safe? A finding carries the
+   concrete bad outcome it produces (which output, on which input) and one
+   clause of "why this is not a false positive". No "possible issue"
+   without the outcome. (PromptKit adversarial-falsification, MIT.)
+4. **Ladder.** DA — one adversarial pass, the single strongest objection
+   and what changes if it holds: Mode 1 prompts, targeted edits, ports.
+   SPAR — two to four lenses matched to the artifact plus one Outlier from
+   an unrelated domain plus DA, one finding each: containers, skills,
+   pipelines. BENCH — five or more lenses that form their assessment
+   independently before any is revealed, at most two debate rounds, a
+   reasoned judge verdict that states what was checked, what was not and
+   what the review cannot catch: artifacts that ship to other people or
+   carry money, legal or safety consequences, or on request. Verdicts:
+   SHIP · FIX [list] · RECAST (wrong lens set) · HALT (fundamental).
+   (R-Duck review ladder, MIT.)
+5. **Decorrelation label.** A check counts only if the checker differs
+   from the author on a named axis — model, framing (against the brief,
+   not the draft), evidence (primary sources), direction (from the
+   conclusion backwards), stake (rewarded for finding a defect). The
+   Evaluation Report names its axis; when none applies (this framework
+   reviewing a prompt it just wrote, the same model twice) it opens with
+   "INTERNAL — self-confirmation" and recommends an external pass for
+   anything consequential. (Agents-of-AI error-decorrelation, MIT.)
 
 **Rebuild vs. Surgical Edits Decision:**
 

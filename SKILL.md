@@ -25,6 +25,8 @@ says; do not reconstruct a reference from memory.
 | references/output-formats.md | before writing the deliverable: the selected mode/terminal format, the Delivery Block, EDITS & REVISIONS, the transport wrapper |
 | references/failures-catalog.md | before every delivery — the catalog pass |
 | references/worked-examples.md | when a mode call is close or a deliverable's expected depth needs calibrating |
+| references/interview-probes.md | when an interview reaches category 3, or any answer carries a vague quantifier, a subjective adjective, an unanchored comparative, a missing bound, or an if without an else |
+| references/prompt-lint.md | during the judge pass, on every generated prompt body, system prompt, station or brief |
 
 Framework edits happen on these files (install and mirror steps: DEPLOY.md).
 This file is held under a measured directive ceiling (`tools/instruction_count.py`
@@ -40,6 +42,12 @@ detection. Refuses to claim: that a deliverable behaves as designed once
 deployed (the Deployment Test is the user's verification, not proof), that
 platform mechanics not verified in-session are current, or that its own
 review of its own output is an independent audit.
+
+Priority when instructions collide — here and inside every generated system
+prompt: 1 the user's stated goal and non-goals · 2 phase gates, STOP rules and
+approval gates · 3 MUST / NEVER guardrails · 4 format and packaging rules ·
+5 examples and illustrations. An example never overrides normative text; a
+conflict the order does not resolve is surfaced, never compromised silently.
 
 ## Behavioral fingerprint
 
@@ -88,6 +96,7 @@ embedding the engine. What always holds:
 - Ledger before 🟢: line 0 Objective/Success-state (never N/A) plus one substantive line per category; "✓ covered" without the substance is a gate violation.
 - Generate only at 🟢 or on "Go" / "Proceed".
 - An interview embedded in a deliverable carries its complete gate logic — never a back-reference to this engine (catalog: self-containment).
+- Code-destined builds with a visible workspace (Handoff Brief, Code skill brief): discover before asking — inspect the repo and system context first, never ask what it already shows, at most 3 owner questions, each proposed as A (recommended) / B.
 
 ## Runtime path
 
@@ -154,7 +163,7 @@ rebuild recommended" as a legitimate audit outcome.
   - Failure report: observed misbehavior ("it keeps doing X") with no prescribed fix → root-cause trace before any edit; a prescribed fix still gets the trace.
   - Port: a target platform is named with "port / convert / adapt for / make this work in" → Porting Checklist instead of the audit.
   - Edit/Revision: a targeted change to a named section, behavior, or rule → EDITS & REVISIONS format.
-  - Audit (default): a vague "make this better" → full audit — catalog pass plus structural review (missing, redundant, contradictory) → Evaluation Report: one-line verdict, findings ranked by severity, recommended action.
+  - Audit (default): a vague "make this better" → full audit at the ladder tier the artifact warrants (protocols §Audit method: segment inventory, steelman, falsified findings, decorrelation label) → Evaluation Report: one-line verdict, findings ranked by severity, recommended action.
   - Edit vs audit unclear → ask once: "Full audit-and-rebuild, or surgical edits to specific sections?"
 - Rebuild vs edits (Scenario B): surgical edits are the default; rebuild only on architectural mismatch, 3+ catalog fails or fundamental contradictions, scope expansion the original architecture cannot carry, an original that is the worse half, or artifact-class mismatch (the strongest trigger). Rebuild → state it with one-sentence reasoning, treat the original as a requirements document, count unresolved variables — ≥3 → run the Interview Engine first (the rebuild valve, also after AUDIT) — then Phase 3 on the combined requirement set. Ship-as-is when nothing fails and the request is already covered.
 
@@ -213,12 +222,15 @@ rules needing consistent application → Mode 3; else Mode 1.
 - Ambiguous → count the assumptions Mode 1 would need: ≤2 → Mode 1 with them stated; ≥3 → Mode 2 (stacked defaults are a degraded interview; catalog: placeholder-discipline).
 - Mode 1 scaffold: embed an inline consultative scaffold when ≥2 hold — named audience, voice matters, specialized terminology, reused as a template; otherwise ship a lean direct-execution trigger. Construction spec: interview-engine.md.
 - Mode 1 vs Mode 2 differ by deployment target (one-shot pasted anywhere vs permanent system prompt plus per-session trigger), not by whether an interview occurs. The embedded interview is a property any deliverable may carry: grant it when the runtime user will lack build-time context; withhold it when the build-time interview resolved everything or the target runs its own interview (a Code brief feeds superpowers' brainstorming).
-- Mode 4 destination split: chat- or Cowork-destined single-file skill → generate the full SKILL.md; Claude Code-destined, multi-file, or script-bearing → a skill BRIEF for superpowers' writing-skills or skill-creator, which install and triggering-test where the skill runs.
+- Mode 4 step zero: confirm the workflow is actually repeated — a one-off gets an answer, not a skill. Destination split: chat- or Cowork-destined single-file skill → generate the full SKILL.md to the skill standard in output-formats.md (mode card, ≤60-line body, ≤7 falsifiable steps, ≥4 evals with one adversarial); Claude Code-destined, multi-file, or script-bearing → a skill BRIEF for superpowers' writing-skills or skill-creator, which install and triggering-test where the skill runs.
 
 ### Phase 4 — generation
 
 Load references/craft-rules.md before writing any body, then the selected
-format from references/output-formats.md. Every full deliverable opens with
+format from references/output-formats.md. A voice-bearing build (captions,
+recaps, reviews, replies sent in the user's name) starts from a voice capsule
+built from the user's own samples; with no samples, say so and ship the
+neutral default — never claim a matched voice (craft rule 9). Every full deliverable opens with
 the Deployment Header — Deploy in · Install/Invoke · Model tier · Why, plus a
 Deployment note for agentic and Research targets. EDITS deliverables open
 instead with one line: "Deployment: unchanged — [artifact class, environment]
@@ -235,8 +247,8 @@ blocks (ask for an upload first if the artifact arrived as pasted text), and
 the complete edited artifact for anything larger. Every copyable
 block obeys the transport-wrapper rule. Close every deliverable with the
 Delivery Block: strengths, limitations, verify-before-use, complementary
-tooling when something genuinely pairs, and the Deployment Test on fresh
-builds.
+tooling when something genuinely pairs, a Done-when line a third party could
+verify, and the Deployment Test on fresh builds.
 
 ## Catalog pass (before every delivery)
 

@@ -328,6 +328,27 @@ SKILL.md in one fenced block —
   one counter-example. Self-contained per catalog entry self-containment; may reference files
   bundled inside its own skill folder, nothing outside it.
 
+**Skill standard for every generated SKILL.md** (fable-mythos skill
+standards + Agents-of-AI mode card, both MIT):
+- Step zero, stated in the Reasoning line: the workflow is repeated; a
+  one-off task gets an answer, not a skill.
+- Description = the trigger: what it does plus 3–4 phrasings a user would
+  actually type, and the situations it must NOT fire in.
+- Body ≤ 60 lines: a mode card first — **Activate when** / **Deactivate
+  when** / **Completion criteria** / **Allergy** (what it must never do) —
+  then ≤ 7 numbered steps, each falsifiable (a step that cannot fail is not
+  a step), the rule precedence in one line (explicit user requests beat
+  style rules), ≤ 5 output sections, one example and one counter-example.
+- Bulk (voice samples, long templates, reference lists) → `examples.md` in
+  the skill folder, loaded on demand; never inline.
+- Ships with ≥ 4 eval cases in the vault's JSONL shape (normal · messy ·
+  edge · adversarial — the adversarial one asks for something the skill
+  should refuse) and one annotated example.
+- Self-check before delivery, seven questions: description triggerable? ·
+  every step falsifiable? · body ≤ 60 lines? · adversarial eval present? ·
+  no expert preamble? · rule precedence stated? · nothing the executor
+  model (Sonnet-class) cannot follow?
+
 **If brief (Code-destined / multi-file / script-bearing):** deliver a skill
 brief — goal, trigger situations, procedure outline, required scripts and
 files, and 2–3 test inputs that SHOULD trigger it plus 1 that should NOT —
@@ -372,8 +393,7 @@ public / publishable version other people can set up themselves?"
   first commit, so publishing later is an extraction, never a rewrite or a
   separate public fork. As the final scope item: "At project completion,
   run the publishing-a-repo skill
-  (C:\Users\Tobey\.claude\skills\publishing-a-repo\ on the main PC; in
-  other environments reference it by skill name). If its one-time
+  (installed as a local skill; reference it by name). If its one-time
   Windows verification is still open (gitleaks binary on PATH, wrapper
   exit codes tested on this machine, license step confirmed), complete
   that first — it gates first real use."
@@ -467,6 +487,18 @@ an explicit SCOPE LOCK (files/areas to create, modify, and NOT touch), STOP
 CONDITIONS ("stop and ask before: [destructive/expansive actions]"), and
 binary ACCEPTANCE CRITERIA. Constraints alone are not a scope lock — an
 agentic consumer needs boundaries stated as boundaries.
+
+**Goal block (agentic and scheduled consumers — Cowork briefs, Routines,
+scheduled tasks, one-shot agent prompts):** the prompt's head is six
+labelled lines, in this order (shape: fable5 GOAL_FORMAT, MIT):
+`Goal:` the outcome, not the activity, one sentence · `Tools:` the
+connectors and tools by name, so the agent acts instead of guessing ·
+`Effort:` medium | high | xhigh, honestly — xhigh only where a wrong early
+decision poisons every later step · `Plan:` 3–5 steps, the agent fills in
+the rest · `Done when:` a condition a third party could verify · `Guardrails:`
+what must not happen without a human (rename, delete, send, post, pay,
+submit → dry-run list and stop). The same `Done when` line is repeated in
+the Delivery Block next to the Deployment Test.
 
 #### 📝 Output Format for SCENARIO D1 (Comparison Only)
 
@@ -569,6 +601,30 @@ confirm actually hold for their workflow)]
 
 #### 📝 Payload Note: RESEARCH-MODE PROMPTS
 
+**Research template** (every prompt deployed to Research mode; ideas from
+PromptKit anti-hallucination, MIT, and the grounding-gate vocabulary):
+- **Source mode, declared in the prompt's first lines:** SOURCE_LOCKED —
+  answer only from the supplied sources, gaps are written as
+  UNKNOWN_FROM_SOURCE, never filled from memory · SOURCE_PREFERRED — gaps
+  may be filled, every fill is tagged · OPEN_RESEARCH — everything is
+  [UNVERIFIED] until a retrieved source confirms it.
+- **Three stages with a STOP between them:** brainstorm (what would have to
+  be true, what the premise assumes — challenge the premise first) →
+  survey (collect, one line per source, tiered) → verify (re-open the
+  sources behind every load-bearing claim). The run halts at each STOP and
+  states what it has before continuing.
+- **Source tiers, never upgraded by paraphrase:** T1 primary (the work
+  itself, the maker's own words, official docs) · T2 reporting that cites
+  T1 · T3 secondary analysis · T4 unattributed or social. A T3 claim stays
+  T3 however often it is repeated.
+- **Every claim labelled** KNOWN (retrieved this run, T1–T2) · INFERRED
+  (follows from KNOWN, the inference shown) · ASSUMED (neither). More than
+  30 % ASSUMED in a section → stop and report the gap instead of finishing.
+- **Serving an argument never means hiding the counter-case.** When the
+  prompt arms a thesis, a closing "where this weakens the claim" section is
+  mandatory and the strongest opposing source is named; a researcher that
+  returns only confirming material has failed the run.
+
 Prompts deployed to Research mode carry the video-transcript clause below by
 DEFAULT. Drop it only on a clear text-only signal — statutory text, filings,
 peer-reviewed literature — and say so as a one-line Known Limitation.
@@ -621,6 +677,9 @@ After the generated prompt(s), append:
   explicitly flagged "unverified from memory" — a confidently recommended
   deprecated plugin is worse than none. Omit the line entirely when nothing
   genuinely pairs; no filler.
+- **Done when** (fresh builds, and every agentic or scheduled consumer) — one
+  condition a third party could verify without reading the prompt; the same
+  line the Goal block carries, when there is one.
 - **Deployment Test** (fresh Mode 1–3 builds, rebuilds, fusions, and
   generated Mode 4 SKILL.md files — per catalog entry deployment-test-presence) — exactly 3 sample
   inputs with one line of observable expected behavior each: two typical
@@ -630,7 +689,7 @@ After the generated prompt(s), append:
 
 Keep this block tight — about 7–14 lines, plus ONE line for the catalog
 artifacts that apply ("Catalog pass: placeholders 0 · self-contained ·
-craft pass: [weakest dimension] fixed · probe: [verdict] · rebuild covers:
+judge: G5 C4(named gap) E5 S5 U:3 verified/1 flagged · lint: 2 High rewritten · probe: [verdict] · rebuild covers:
 …"), combined, never one bullet each. Cut bullets before adding filler.
 No tier scores, no rubric grading. This section is canonical over the
 abbreviated Delivery Block skeletons shown in the mode output formats: those
@@ -675,6 +734,15 @@ text and the user won't upload it). When a long artifact is supplied only
 as pasted chat text, ask the user to upload it as a file before choosing
 surgical blocks. The What-changed summary and the EDITS deployment
 attestation line apply to file deliveries unchanged.
+
+**Blast radius (every EDITS delivery, any mode):** before the first edit,
+state the blast radius — which sections or lines will change and that
+nothing else will. Findings outside it are recorded as findings under
+Known Limitations, never fixed in passing. Every changed line answers
+"why this line?" with the user's request; a line that cannot is reverted.
+If the requested change genuinely cannot be made inside the stated radius,
+stop and say why — that is a scope conversation, not a judgment call.
+(Agents-of-AI orthogonal-edit + PromptKit minimal-edit-discipline, MIT.)
 
 When surgical blocks are the format:
 

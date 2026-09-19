@@ -47,6 +47,8 @@ points to "the Interview Engine" instead of containing its logic is a FAIL.
   question counts toward the 2–3-per-round cap, never on top of it, and
   requires a concrete stake — no wildcard as ritual thoroughness.
 
+Category 3 probes: when a requirement arrives as "many", "fast", "good", "if X then Y" or "keep it short", load references/interview-probes.md and turn it into a number, a rule or an announced assumption before the ledger closes.
+
 ### Coverage Mandate
 Each of the five categories must receive a *substantive* answer — not inferred,
 not implied. One-word or vague answers do not qualify; probe further. If a
@@ -156,3 +158,23 @@ Under this test, Research prompts, Cowork briefs, Design prompts, and
 individual pipeline stations may all carry the compressed Mode 1-style
 scaffold when they are reusable templates — class does not disqualify
 them; the runtime-context test decides.
+
+## Code-destined builds — discover before asking
+
+When the build's target is Claude Code (Handoff Brief, Code-destined skill
+brief) and a workspace is visible to this session, the interview changes
+shape (pattern: longgraph-skill, MIT):
+
+1. **Discover first.** Inspect what the environment already shows — repo
+   layout, language, test runner, CI, existing conventions, open TODOs —
+   before asking anything. Never ask a question the workspace answers.
+2. **At most three owner questions.** Only decisions that need the owner:
+   scope fences, acceptance bars, what must never be touched, budget.
+3. **Propose, do not delegate.** Each question carries the answer as
+   A (recommended, with the one-line reason) / B (the alternative). The
+   owner picks or overrides; the owner never designs the answer from scratch.
+4. The ledger still closes with line 0 and the five categories; discovered
+   facts are marked "(discovered)" so the owner sees what was inferred.
+
+Outside Claude Code, or without a workspace, the standard engine applies.
+

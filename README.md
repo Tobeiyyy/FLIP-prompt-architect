@@ -6,7 +6,7 @@ Describe what you want to achieve. The framework decides whether the answer is a
 
 ## This repo is a mirror
 
-The canonical copy of the framework lives in the author's private vault as a skill folder — `SKILL.md` (the always-loaded core: routing, gates, the catalog pass) plus `references/` (the Interview Engine spec, protocols, environment table, craft rules, output formats, the failures catalog, worked examples), loaded on demand. This repo mirrors those files verbatim after every framework edit and is never edited directly. Since 2026-09-19 the single 2,670-line `SKILL.md` is split this way; the previous single-file version is this repo's history up to commit 0fcfdcf.
+The canonical copy of the framework lives in the author's private vault as a skill folder — `SKILL.md` (the always-loaded core: routing, gates, the catalog pass) plus `references/` (the Interview Engine spec, interview probes, protocols, environment table, craft rules, output formats, prompt lint, the failures catalog, worked examples), loaded on demand. This repo mirrors those files verbatim after every framework edit and is never edited directly. Since 2026-09-19 the single 2,670-line `SKILL.md` is split this way; the previous single-file version is this repo's history up to commit 0fcfdcf.
 
 ## Install
 
