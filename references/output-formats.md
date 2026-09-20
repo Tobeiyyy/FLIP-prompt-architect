@@ -383,6 +383,65 @@ sole job is to make that interview rich. One fenced block containing:
   already established. Downstream reads these before asking its own —
   so the user relays back only questions this brief could not foresee.
 - What NOT to build (scope fences)
+- **Execution packet** (bounded; shape after Agents-of-AI Build Chain, MIT):
+  baseline revision (branch and commit the brief assumes — "state the
+  commit in your first message" when the brief cannot know it) · allowed
+  files or directories · forbidden surfaces (files, services, data the
+  build never touches) · acceptance evidence (the command or observable
+  that proves done; never "works") · rollback condition (the state that
+  means revert, and to what) · midpoint re-read (at the plan's midpoint,
+  re-read this brief and report changed files, evidence, blockers, the
+  smallest next diff). A brief missing any of these fields is not
+  finished (catalog: unbounded-packet).
+- **Execution rules** — the eight lines below, verbatim; the brief adds a
+  project number where one exists (the spend budget, the file cap) and
+  never removes a line:
+  1. Evidence gate: no completion claim without the command output in the
+     same message; "tests pass" is the run with its counts. Each change
+     gets a positive, a negative and a boundary case, or one line stating
+     why one does not apply.
+  2. Read-back: note the line count before editing; after every write,
+     re-read the region and compare. An empty or zero result is a finding,
+     not a success; a step that cannot be read back is reported as
+     unverified.
+  3. Razor: before writing code — must it exist at all → already in this codebase
+     → stdlib → platform feature → installed dependency → one line →
+     minimum code. Stop at the first rung that holds; name what was skipped.
+  4. Blast radius first: state the files a change will touch before
+     touching them; anything found outside goes on a GAP list in the final
+     report, never fixed in passing; every changed line answers "why this
+     line?" with the task.
+  5. Retry rule: two failures of the same approach → switch method; three
+     identical operations → stop and ask; a handoff between agents must
+     change state, not just custody.
+  6. Context rule: scope before searching; the named file over a broad
+     grep; at most 50 files per discovery pass, then a summary; a resolved
+     observation collapses to one line.
+  7. Bulk work: never script around per-item verification to go faster;
+     bounded batches, each verified before the next.
+  8. Owner-only decisions, always ask: push, destructive git, production or
+     remote mutation, secrets or real data, spend beyond the stated budget,
+     lowering an acceptance bar, frozen contracts. Everything else: decide,
+     then report the decision in one line.
+- **Dispatch note** — in every Code brief except a single-file change,
+  because superpowers' subagent-driven-development is the default executor
+  downstream and the brief cannot see whether it will spawn agents: one
+  chief agent dispatches bounded specialists, each with one assignment, an
+  allowed write surface, the evidence it must return and a stop condition;
+  no supervisor chains; two agents never write the same file. (Shape after
+  Agents-of-AI single-dispatch-operator, MIT.)
+- **Unattended-run line** (only when all three hold: the build spans many
+  sessions, nobody watches each round, and "done" is verifiable by tests,
+  gates or metrics): "After brainstorming and the plan, hand execution to
+  /loop-graph (longgraph plugin); this brief's hard constraints, forbidden
+  surfaces and non-goals become its STANDING directives." The line is
+  preceded by its precondition, as with Impeccable: "longgraph must be
+  installed (/plugin marketplace add levi-qiao/longgraph-skill, then
+  install from /plugin); verify by typing /longgraph before starting —
+  not installed → run this as a plain session and tell the user." A
+  watched session or a one-file change never gets this line; a build whose
+  "done" must be judged by a human each time gets a plain task instead,
+  stated in one sentence.
 
 **Publish intent (ask once, at brief time):** Before generating any Code
 Handoff Brief, ask one question: "Should this project eventually get a
@@ -457,7 +516,10 @@ files/sources in play and where they live; hard constraints; the expected
 final artifact (format + destination); and scope fences (what NOT to touch).
 Do NOT pre-script the agent's steps — Cowork plans its own execution; the
 brief's job is goal clarity and boundaries, same philosophy as the Code
-Handoff Brief.
+Handoff Brief. A run that mutates many files or items (a PC cleanup, a bulk
+rename, an inbox sweep) also carries the Code brief's execution rules 1, 2,
+4, 7 and 8 verbatim: the bulk-work rule is the one an agent under volume
+pressure drops first.
 
 Delivery Block as standard.
 

@@ -373,7 +373,7 @@ id: orthogonal-edit · type: structural · confidence: tested · version: 1 · t
 ```
 id: authority-laundering · type: craft · confidence: tested · version: 1 · tags: claims, research, briefs
 ```
-- **Trigger:** any generated body, brief or report that cites a law, a policy, "best practice", official docs or a statistic; every Research-mode prompt.
+- **Trigger:** any generated body, brief or report that cites a law, a policy, "best practice", official docs or a statistic; every Research-mode prompt; every HANDOFF block, Stand line or summary of prior work this framework writes (a proposal that re-enters the record as a decision is the same failure — tag decided / agreed / proposed, and "decided" only for a choice the user made in a turn of their own).
 - **Failure:** an inference or a preference presented as sourced authority — the model's guess labelled "the docs say", a company rule written as "required by law", a user's wish repackaged as an industry standard so the downstream reader will not question it.
 - **Signal:** an authority named with no in-session verification and no location; a claim the user asked to present as external when it is internal.
 - **Fix:** label every such claim KNOWN (verified in-session, source named) / INFERRED (derived, basis named) / ASSUMED (unverified); write the honest category into the body ("company policy", "unverified — confirm with counsel") and say so in one line; hold the position under pushback.
@@ -398,7 +398,7 @@ id: session-drift · type: routing · confidence: tested · version: 1 · tags: 
 - **Trigger:** this framework's own conversations past roughly ten turns, and every generated Mode 2 container.
 - **Failure:** the work drifts and nobody says so. Six subtypes — goal drift (building something the seed never asked for), constraint decay (see above), register drift (tone or language slipped), scope creep (features accreting without a decision), assumption accretion (defaults made three turns ago now treated as the user's choices), ledger staleness (the ledger no longer matches what was agreed).
 - **Signal:** two or more subtypes present at once; a "where are we" question the run cannot answer from the ledger.
-- **Fix:** at two or more subtypes, re-anchor before any further work: one block with the original goal, the decisions actually made by the user, the assumptions that crept in (marked as such), open items and what is out of scope — then ask the user to confirm. Still drifting after a re-anchor → advise a fresh session with a HANDOFF block. Generated Mode 2 containers carry the same rule in their own words.
+- **Fix:** at two or more subtypes, re-anchor before any further work: one block with the original goal, the decisions actually made by the user, the assumptions that crept in (marked as such), open items and what is out of scope — then ask the user to confirm. Still drifting after a re-anchor → advise a fresh session with a HANDOFF block written to the global HANDOFF rule (provenance-tagged decisions, exact numbers, raw anchors verbatim). Generated Mode 2 containers carry the same rule in their own words.
 - **Tier:** BEHAVIORAL. **Artifact:** the re-anchor block in the transcript, or the fresh-session advice with the HANDOFF.
 - **Evals:** pa-41
 
@@ -522,3 +522,14 @@ id: exhaustion-compliance · type: agentic · confidence: tested · version: 1 �
 - **Fix:** repeat the verdict in one line with the reason, do the part that is fine, keep the flag; a change of position names the new evidence. Generated assistants carry the same rule (craft rule 6 self-repair line covers the miss).
 - **Tier:** BEHAVIORAL. **Artifact:** the one-line held verdict, or the named new evidence.
 - **Evals:** pa-39
+
+### unbounded-packet
+```
+id: unbounded-packet · type: agentic · confidence: tested · version: 1 · tags: briefs, scope, done-when
+```
+- **Trigger:** every Code Handoff Brief and every Cowork brief that mutates files.
+- **Failure:** the brief names the goal and the scope fences but not the baseline revision, the allowed files, the forbidden surfaces, the acceptance evidence or the rollback condition; the downstream agent rebuilds work that exists, edits files outside its remit, and reports done by assertion. A watched one-file task handed to an unattended loop, or a multi-session unattended build with no hand-off line, is the same entry's routing half.
+- **Signal:** a brief whose fenced block has no Execution packet or Execution rules section; an unattended-run line on a watched or single-file task; no unattended-run line where all three conditions hold (many sessions, nobody watching rounds, done verifiable by tests, gates or metrics).
+- **Fix:** the Execution packet fields and the eight Execution rules from output-formats §Code Handoff Brief, verbatim, with the project's own numbers filled in; the unattended-run line only when its three conditions hold; a user instruction that contradicts a rule ("fix anything else you find") is flagged in one line and rewritten into the GAP-list rule, never copied into the brief unflagged.
+- **Tier:** STRUCTURAL. **Artifact:** the Execution packet fields and the eight rules present in the fenced block; the unattended-run line present or absent per the three conditions.
+- **Evals:** pa-50, pa-51
