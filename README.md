@@ -8,6 +8,8 @@ Describe what you want to achieve. The framework decides whether the answer is a
 
 The canonical copy of the framework lives in the author's private vault as a skill folder — `SKILL.md` (the always-loaded core: routing, gates, the catalog pass) plus `references/` (the Interview Engine spec, interview probes, protocols, environment table, craft rules, output formats, prompt lint, the failures catalog, worked examples), loaded on demand. This repo mirrors those files verbatim after every framework edit and is never edited directly. Since 2026-09-19 the single 2,670-line `SKILL.md` is split this way; the previous single-file version is this repo's history up to commit 0fcfdcf.
 
+`evals/` holds the regression set and its scoring rubric. It is the vault's set minus two reference cases that compare against private files, with names and places in the test inputs swapped for neutral ones.
+
 ## Install
 
 ### Claude.ai (Skills)
@@ -72,9 +74,14 @@ Full, unedited session transcripts live in [`examples/`](examples/):
 
 More use-case examples are being added to the folder over time.
 
-## External dependency: superpowers (optional but assumed for Code routes)
+## External dependencies (optional, used by Code routes)
 
 Deliverables targeting Claude Code — Handoff Briefs and Code-destined skill briefs — assume [superpowers](https://github.com/obra/superpowers) (by Jesse Vincent) is installed. It's a Claude Code plugin providing the downstream methodology the framework hands off to: a brainstorming skill that turns the brief into a design doc with repo context, plan writing, and subagent-driven execution. Install it via Claude Code's plugin system (`/plugin install superpowers@claude-plugins-official`, or the + → Plugins menu in the desktop app). Without it, Code-routed deliverables still work as plain opening prompts — you just run the design conversation manually instead of having the methodology take over.
+
+Two more plugins appear only in specific briefs, and each brief that uses one states its install step and a fallback:
+
+- **Impeccable** (`pbakaus/impeccable`) — in briefs for projects with a custom UI: `/impeccable init` seeded from the brief's design-identity section, then audit and polish at each UI milestone.
+- **longgraph** (`levi-qiao/longgraph-skill`) — only in briefs for unattended multi-session builds whose "done" is checkable by tests or metrics: execution is handed to `/loop-graph` with the brief's hard constraints as standing directives. Not installed → the brief runs as a plain session.
 
 ## Validation
 
@@ -86,7 +93,7 @@ Deployment mechanics were confirmed by completed deployments on every environmen
 
 Downstream execution was spot-checked rather than exhaustively session-tested. One generated assistant ran through full sessions in a clean context and held every embedded gate; the remaining test artifacts are format-verified. Per-deployment verification is deliberately the operator's job, which is why every deliverable ships with its own "Verify Before Use" section.
 
-A 29-input Golden Regression Set is embedded in the skill file itself, with locked expected outcomes, so any edit you make can be checked for regressions.
+A 51-case regression set lives in [`evals/`](evals/), with locked expected outcomes and a scoring rubric, so any edit you make can be checked for regressions. Every case passed on Sonnet (pa-01 to pa-49 on 2026-09-19, pa-50 and pa-51 on 2026-09-20), on the wording before names and places were swapped for this repo.
 
 ## Known limitations
 
@@ -100,13 +107,13 @@ Rarely-triggered rules drift first. Checks that fire once in a hundred sessions 
 
 Account memory personalizes verdicts. Inside your own Claude account, project memory feeds the interview and can shift architecture choices toward your known context. That's legitimate behavior, but it means your results and a stranger's results can differ on the same input. Clean-context behavior was tested separately and is input-literal.
 
-It cannot verify what it cannot see. Skill triggering, connector availability, and platform field limits are checked empirically where possible and flagged as unverified where not. The Environment Capability Table inside the skill file is designed as a user-maintained measurement log. Entries marked untested are instructions to you, not oversights.
+It cannot verify what it cannot see. Skill triggering, connector availability, and platform field limits are checked empirically where possible and flagged as unverified where not. The Environment Capability Table (`references/environment-table.md`) is designed as a user-maintained measurement log. Entries marked untested are instructions to you, not oversights.
 
 ## Maintaining it
 
-The framework is built to be edited. The regression set locks expected routing, the version-stamped Interview Engine flags when downstream copies need re-syncing, and the failure-report protocol applies to the framework itself (its own strip-note ceremony was deleted mid-testing when it failed its own deletion test). If you change something, run the regression inputs.
+The framework is built to be edited. The regression set locks expected routing, the version-stamped Interview Engine flags when downstream copies need re-syncing, and the failure-report protocol applies to the framework itself (its own strip-note ceremony was deleted mid-testing when it failed its own deletion test). If you change something, run the cases in `evals/`.
 
-All edits happen on the canonical folder in the vault. Update the repo by copying the new `SKILL.md` and `references/` into the root and pushing; the commit message names the vault commit.
+All edits happen on the canonical folder in the vault. Update the repo by copying the new `SKILL.md` and `references/` into the root, and the eval set (cleaned as above) into `evals/`, then pushing; the commit message names the vault commit.
 
 ## Feedback
 
