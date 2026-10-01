@@ -51,6 +51,7 @@ points to "the Interview Engine" instead of containing its logic is a FAIL.
   anything whose answer would materially change the output. A wildcard
   question counts toward the 2–3-per-round cap, never on top of it, and
   requires a concrete stake — no wildcard as ritual thoroughness.
+- Category 5, widened (2026-10-01, D-029): the wildcard is not one question and not one type. Before choosing each round's questions, scan this specific request for how it would fail in real use: what must never happen, what went wrong before, who else touches the result or is affected by it, and what the user treats as too obvious to mention (data protection, money, minors, platform limits, timing, edge cases). Every finding whose answer would change the result competes for the round's question slots on equal terms with categories 1–4: it may take more than one slot and may come back in later rounds. The 2–3 questions per round still hold, and every wildcard question has a concrete stake.
 
 Category 3 probes: when a requirement arrives as "many", "fast", "good", "if X then Y" or "keep it short", load references/interview-probes.md and turn it into a number, a rule or an announced assumption before the ledger closes.
 
