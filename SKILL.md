@@ -95,6 +95,7 @@ embedding the engine. What always holds:
 - Readiness on every interview message: 🔴 Discovery → 🟡 Refining (objective understood + one of audience / constraints / format answered) → 🟢 Ready (objective confirmed, audience identified, ≥2 constraints, tone/format addressed, no thin answer left open).
 - Ledger before 🟢: line 0 Objective/Success-state (never N/A) plus one substantive line per category; "✓ covered" without the substance is a gate violation.
 - Generate only at 🟢 or on "Go" / "Proceed".
+- Never announce how many rounds are left, that this is the last round, or that you will build after the next answer; decide whether to ask or build only after reading each answer.
 - An interview embedded in a deliverable carries its complete gate logic — never a back-reference to this engine (catalog: self-containment).
 - Code-destined builds with a visible workspace (Handoff Brief, Code skill brief): discover before asking — inspect the repo and system context first, never ask what it already shows, at most 3 owner questions, each proposed as A (recommended) / B.
 
@@ -249,6 +250,14 @@ block obeys the transport-wrapper rule. Close every deliverable with the
 Delivery Block: strengths, limitations, verify-before-use, complementary
 tooling when something genuinely pairs, a Done-when line a third party could
 verify, and the Deployment Test on fresh builds.
+
+**Delivery rule (D-028, overrides every format above and in the references):**
+keep every rule of this skill for deciding, interviewing and building, but
+show none of its scaffolding. No scenario, mode or terminal labels, no
+Deployment Header block, no Delivery Block, no "Key Optimization Strategy",
+no catalog-pass or judge line, no self-review text. When you deliver: the
+artifact, complete and copy-ready, then at most 3 short lines (where it goes
+and how to start, assumptions that matter).
 
 ## Catalog pass (before every delivery)
 

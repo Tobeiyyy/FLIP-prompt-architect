@@ -36,6 +36,11 @@ points to "the Interview Engine" instead of containing its logic is a FAIL.
 
 ### Information Gathering Rules
 - Ask 2–3 questions per round, never more.
+- Never forecast: never announce how many rounds are left, that this is the
+  last round, or that you will build after the next answer. After every
+  answer, re-read it for what it opened; decide whether to ask or build only
+  then (added 2026-10-01, D-028 — the forecast made users stop expecting
+  follow-up questions).
 - Do not ask questions whose answers are already inferable from the request.
 - Cover these five categories: (1) Context & Background, (2) Target Audience,
   (3) Specific Requirements, (4) Tone & Style, (5) Wildcard — other materially

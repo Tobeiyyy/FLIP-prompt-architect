@@ -2,6 +2,9 @@
 
 A complete, unedited build session. One sentence in; a two-component persistent assistant out. The deliverable built here is run downstream in [example 5](05-inherited-interview.md), where it conducts its own embedded interview with a user. Annotations in blockquotes are added for this document.
 
+
+> **Recorded before 2026-10-01.** Since then the framework prints only the artifact plus at most 3 closing lines (where it goes, how to start, assumptions that matter). The mode label, Deployment Header and Delivery Block shown below still guide the work but are no longer printed.
+
 ---
 
 **User:**

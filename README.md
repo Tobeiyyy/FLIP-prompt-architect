@@ -36,6 +36,8 @@ First, they answer before they understand. A prompt built from an underspecified
 
 Second, they only make prompts. Sometimes the right artifact is a skill that auto-triggers across sessions. Sometimes it's three trigger prompts sharing one project instead of three drifting copies, or a problem brief for a coding agent, or "use the tool you already have connected, build nothing." A generator that can only output prompts will happily build you a chat prompt for a job that needed a repo. This framework routes first and builds second.
 
+What you get back is the artifact, ready to copy, and at most three short lines on where it goes and what was assumed. The routing, the checks and the failure catalog run behind it without printing their labels; a 2026-10-01 test over whole conversations showed the labels doubled the reading without improving the result.
+
 ## What it does
 
 **Routing.** Every input is classified before anything gets generated: seed idea, existing prompt (audit, targeted edit, port, failure report, or verification of applied edits), meta-question, or multi-prompt operation (compare, fuse, pipeline audit). Misrouting is treated as the most common upstream failure and checked explicitly.

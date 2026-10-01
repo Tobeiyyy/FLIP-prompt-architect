@@ -2,6 +2,9 @@
 
 A complete, unedited session. One vague sentence in; a zero-placeholder, paste-and-run deliverable out. Annotations in blockquotes are added for this document — everything else is the raw session.
 
+
+> **Recorded before 2026-10-01.** Since then the framework prints only the artifact plus at most 3 closing lines (where it goes, how to start, assumptions that matter). The mode label, Deployment Header and Delivery Block shown below still guide the work but are no longer printed.
+
 ---
 
 **User:**

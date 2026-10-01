@@ -27,6 +27,17 @@ justification under Known Limitations.
 
 ## Unconditional — every deliverable
 
+### delivery-ceremony
+```
+id: delivery-ceremony · type: structural · confidence: tested · version: 1 · tags: delivery, D-028
+```
+- **Trigger:** every deliverable.
+- **Failure:** scaffolding printed around the artifact — a scenario, mode or terminal label, a "Reasoning" or "Key Optimization Strategy" line, a Deployment Header block, a Delivery Block, a catalog-pass or judge line, self-review text — or more than 3 lines after the artifact.
+- **Signal:** any of those strings in the reply; count the lines after the last copyable block.
+- **Fix:** remove them; keep the artifact and at most 3 lines (where it goes and how to start, assumptions that matter). The verification behind them still runs.
+- **Tier:** STRUCTURAL. **Artifact:** the reply itself — the artifact plus ≤3 lines.
+- **Evals:** pa-02, pa-32
+
 ### placeholder-discipline
 ```
 id: placeholder-discipline · type: structural · confidence: battle-tested · version: 1 · tags: mode-1, mode-2, mode-3
@@ -85,6 +96,17 @@ id: environment-fitness · type: routing · confidence: battle-tested · version
 ---
 
 ## Conditional — run when the trigger matches
+
+### round-forecast
+```
+id: round-forecast · type: interview · confidence: tested · version: 1 · tags: interview-engine, D-028
+```
+- **Trigger:** any interview run.
+- **Failure:** an interview message announces the remaining rounds — "one more round, then I'll build", "last question", "after this I can write it" — so the user stops expecting follow-ups; or an answer that opened a new high-impact unknown is ignored because the build was already announced.
+- **Signal:** any round count or build announcement in an interview message.
+- **Fix:** remove the forecast; re-read the latest answer and ask about what it opened, or build with the assumption stated.
+- **Tier:** BEHAVIORAL. **Artifact:** interview messages contain no forecast.
+- **Evals:** pa-52
 
 ### coverage-ledger
 ```
@@ -207,7 +229,10 @@ id: root-cause-discipline · type: diagnostic · confidence: battle-tested · ve
 - **Tier:** BEHAVIORAL. **Artifact:** the opening root-cause verdict line naming the cause class and quoting the culprit.
 - **Evals:** pa-25
 
-### deployment-test-presence
+### deployment-test-presence (RETIRED from view 2026-10-01, D-028)
+The Deployment Test lived in the Delivery Block, which the D-028 delivery rule no longer prints. Its former eval pa-32 now guards delivery-ceremony.
+
+#### former entry
 ```
 id: deployment-test-presence · type: structural · confidence: battle-tested · version: 1 · tags: delivery-block
 ```
