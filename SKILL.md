@@ -90,6 +90,7 @@ embedding the engine. What always holds:
 
 - 2–3 questions per round, never more; never ask what the request already answers.
 - Five categories: 1 Context & Background · 2 Target Audience · 3 Specific Requirements · 4 Tone & Style · 5 Wildcard — the wildcard is not one question and not one type. Before choosing each round's questions, scan this specific request for how it would fail in real use: what must never happen, what went wrong before, who else touches the result or is affected by it, and what the user treats as too obvious to mention (data protection, money, minors, platform limits, timing, edge cases). Every finding whose answer would change the result competes for the round's question slots on equal terms with categories 1–4: it may take more than one slot and may come back in later rounds. The 2–3 questions per round still hold, and every wildcard question has a concrete stake. (Widened 2026-10-01, D-029.)
+- Station sketch: on a build-class seed, before the first round, test the raw seed against the Phase 3 decomposition criteria. One other than reuse value holds → one of the round's 2–3 questions is a one-line sketch of the stations put as a question ("this could run as A → B; one container, or think the split through?"), never the verdict; on one criterion with a copy-paste handoff, recommend neither yet (protocols §Early sketch).
 - Coverage: each category gets a substantive answer or an explicit N/A with justification; a one-word answer gets a probe, not acceptance.
 - Pre-specified input shortcut: mark what the input already covers and interview only the open categories; all five covered → open at 🟢 with the ledger.
 - Readiness on every interview message: 🔴 Discovery → 🟡 Refining (objective understood + one of audience / constraints / format answered) → 🟢 Ready (objective confirmed, audience identified, ≥2 constraints, tone/format addressed, no thin answer left open).
@@ -192,20 +193,27 @@ task → trigger prompt.
 ### Phase 3 — decomposition, then mode
 
 Decomposition check (seeds and rebuilds; default: single prompt). Recommend a
-pipeline only when ≥2 hold: persona conflict · mode mismatch across stages ·
+pipeline only when ≥2 hold (≥1 when every handoff already runs without the
+user or the user asked for that — choosing to automate never lowers it; a
+copy-paste handoff keeps 2): persona conflict · mode mismatch across stages ·
 temporal separation ACROSS CONTAINERS (different sessions AND different
 instruction sets or knowledge bases — time alone never counts) · independent
-reuse value · instruction-budget overflow. Three outcomes: (a) sequential
+reuse value · instruction-budget overflow · surface split (a stage cannot
+run on the row that carries the others). Three outcomes: (a) sequential
 steps, one persona, one session → phases of one prompt; (b) many sessions over
 one shared knowledge base with compatible personas → ONE container with one
-trigger prompt per phase; (c) instruction conflict, budget overflow, or
-disjoint knowledge bases → separate stations. Shared knowledge files are an
+trigger prompt per phase; (c) instruction conflict, budget overflow,
+disjoint knowledge bases, or a surface split → separate stations. On a
+build-class seed with an interview, run it provisionally at first
+contact too: a criterion other than reuse value → one interview question slot
+offers a one-line station sketch to think through together, never the
+verdict (protocols §Early sketch). Shared knowledge files are an
 explicit signal toward (b): uploaded once, no copies drifting. Tie-breaker
 when (b) and (c) are both constructible — the phase-scoping test: if one
 keyword-routed instruction set carries every stage over the shared corpus
 without budget pressure, and no stage's rules would contaminate another's
-output once scoped to its phase, criteria 1 (persona) and 3 (temporal) do
-NOT fire; a stage that serves texts from OUTSIDE the workflow is what tips
+output once scoped to its phase, criteria 1 (persona), 3 (temporal) and 6
+(surface) do NOT fire; a stage that serves texts from OUTSIDE the workflow is what tips
 to (c), and reuse value alone never forces a pipeline.
 When it fires → protocols §Pipeline Decomposition (Blueprint, approval gate,
 station builds, runbook); never silently generate N prompts.

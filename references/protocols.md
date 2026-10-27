@@ -524,7 +524,14 @@ just "enable search."
 Before selecting a mode, test whether the task should be ONE prompt at all.
 Applies to Scenario A seeds and Scenario B rebuilds. Default posture: single
 prompt. Pipeline is the exception — recommend decomposition into 2+ separate
-prompts/projects only when **≥2** of the following hold:
+prompts/projects only when **≥2** of the following hold, or **≥1** when
+every handoff between the stations runs without the user (subagents or
+skills chaining in Claude Code, a scheduled task reading the file the
+previous station wrote, a script calling the API) — because the user asked
+for the workflow to run without them or the environment already works that
+way. Choosing to automate a stage the user would run by hand does not lower
+the bar. A handoff the user carries by copy-paste or re-upload keeps the bar
+at 2 — each one is manual work on every run (added 2026-10-27, D-031):
 
 1. **Persona conflict** — Stages require expert personas whose instructions
    would contradict if merged (e.g., free-associating creative observer vs.
@@ -542,6 +549,11 @@ prompts/projects only when **≥2** of the following hold:
    outside this workflow.
 5. **Instruction budget overflow** — The merged system prompt would be long
    enough that rule adherence degrades; splitting restores per-prompt focus.
+6. **Surface split** — At least one stage cannot run in the environment that
+   carries the others (live use from the phone during a session vs an
+   unattended weekly run; an image model vs a text surface). A split that
+   one environment-table row could avoid by carrying every stage does not
+   count.
 
 Counter-rule — three outcomes, not two:
 (a) Sequential steps, one persona, one session, one final output → PHASES
@@ -550,19 +562,34 @@ Counter-rule — three outcomes, not two:
     compatible personas → ONE container with MULTIPLE trigger prompts, one
     per phase. Shared knowledge files are an explicit signal toward this
     outcome: uploaded once, no copies drifting out of sync.
-(c) Instruction conflict, budget overflow, or disjoint knowledge bases →
-    separate stations (true pipeline).
+(c) Instruction conflict, budget overflow, disjoint knowledge bases, or a
+    surface split → separate stations (true pipeline).
 
 Tie-breaker when (b) and (c) are both constructible: criteria claimed for a
 pipeline must survive PHASE-SCOPING — if a single keyword-routed instruction
 set carries every stage over one shared corpus without budget pressure, and
 no stage's rules would contaminate another's output once scoped to its
-phase, criteria 1 and 3 do NOT fire. Reuse value (criterion 4) alone never
+phase, criteria 1, 3 and 6 do NOT fire. Reuse value (criterion 4) alone never
 forces a pipeline; a phase is extractable later if standalone need
 materializes.
 
-Multi-step ≠ multi-prompt, and multi-session ≠ multi-project. If <2 criteria
-hold, proceed to the normal decision tree.
+Multi-step ≠ multi-prompt, and multi-session ≠ multi-project. If the bar is
+not met, proceed to the normal decision tree.
+
+**Early sketch (build-class seeds with an interview):** run the criteria once
+provisionally on the raw seed at first contact. When at least one criterion
+other than reuse value holds, one question slot in the first interview round
+carries a one-line station sketch plus the question (in a later round only
+when the criterion first shows in an answer). Weigh the bar as at the full
+decomposition: a sketch on one criterion with a copy-paste handoff offers the
+split as one option beside one container and recommends neither yet, e.g.
+"This could also run as Research once → a Project that works from the file
+→ a weekly scheduled task that updates it. Keep it as one container, or
+think the split through together?" The sketch is an offer to think with the
+user, never the verdict: the full decomposition still runs after the interview on
+the interviewed requirements. A declined sketch comes back only when a later
+answer makes a new criterion fire. No such criterion → no sketch. Seeds that
+open with "Go" / "Proceed" skip it.
 
 **When the check triggers:**
 1. Do NOT silently generate N prompts. State the decomposition verdict with
