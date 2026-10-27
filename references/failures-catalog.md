@@ -87,11 +87,11 @@ id: scenario-misroute · type: routing · confidence: battle-tested · version: 
 id: environment-fitness · type: routing · confidence: battle-tested · version: 1 · tags: phase-0, deployment-header
 ```
 - **Failure:** the Deployment Header does not match the payload's capability needs; the Install/Invoke or Model tier line is missing or vague; the surface was upgraded without payload justification; routing invoked an environment with no table row.
-- **Signal:** live web data without a Research-capable target; multi-file scope or execution loops outside Claude Code; a design payload on a text surface; a procedure shipped as a container; a header with a missing line; a Deployment note missing on an agentic or Research target.
+- **Signal:** live web data without a Research-capable target; multi-file scope or execution loops outside Claude Code; a design payload on a text surface; a procedure shipped as a container; a header with a missing line; a Deployment note missing on an agentic or Research target; a rule that must hold on every Claude Code event shipped as prompt text instead of a hook; a logged-in, bot-blocked or app-refused web step handed to the user although the table's browser column shows a surface that carries it.
 - **Fix:** re-route against references/environment-table.md; complete the header; trigger the Table Maintenance Protocol for an unrowed environment.
 - **When:** every full deliverable (EDITS deliveries carry the one-line attestation instead and are exempt from the header lines).
 - **Tier:** BEHAVIORAL. **Artifact:** the header with all four lines (Deploy in · Install/Invoke · Model tier · Why) or the attestation line.
-- **Evals:** pa-18, pa-20, pa-22, pa-23
+- **Evals:** pa-18, pa-20, pa-22, pa-23, pa-59, pa-61
 
 ---
 
@@ -207,6 +207,39 @@ id: media-syntax-unverified · type: verification · confidence: battle-tested �
 - **Tier:** BEHAVIORAL. **Artifact:** one line: "syntax verified in-session against [source]" or the unverified flag. (render-fitness does not apply to these payloads.)
 - **Evals:** pa-21
 
+### model-guidance-unverified
+```
+id: model-guidance-unverified · type: verification · confidence: untested · version: 1 · tags: generation, model-tier
+```
+- **Trigger:** any generated prompt, system prompt or brief whose executing model is known (named by the user, or fixed by the surface).
+- **Failure:** a body written model-neutral, or from memory, although the target model has its own page of prompting fixes — the fixes differ per model and rot with each release.
+- **Signal:** a known target model, no in-session load of its page, no "model guidance not loaded" line.
+- **Fix:** load the model's page from the "Model-specific guidance" table of Anthropic's prompting best practices and apply it (craft rule 15), or state that it was not loaded.
+- **Tier:** BEHAVIORAL. **Artifact:** one of the ≤3 delivery lines: "tuned to [model] per its prompting page" or "model guidance not loaded (no web)".
+- **Evals:** pa-56
+
+### untested-delivery
+```
+id: untested-delivery · type: verification · confidence: untested · version: 1 · tags: generation, self-test
+```
+- **Trigger:** a Mode 2/3 system prompt or a Mode 4 skill delivered.
+- **Failure:** the deliverable ships after review by the same context that wrote it, although a fresh run could have shown how it behaves.
+- **Signal:** a subagent tool is available and no self-test ran; or no subagent tool and the delivery does not state that the self-test did not run.
+- **Fix:** run the self-test from SKILL.md §Catalog pass (one fresh subagent, two inputs: one normal, one edge); repair a miss before delivery.
+- **Tier:** BEHAVIORAL. **Artifact:** one delivery line: "self-test: 2/2 as intended" (or what was repaired), or "self-test did not run (no subagent here)".
+- **Evals:** pa-58
+
+### tool-description-vague
+```
+id: tool-description-vague · type: craft · confidence: untested · version: 1 · tags: tool-descriptions, mcp
+```
+- **Trigger:** a tool description set (MCP server tools, server instructions, function definitions).
+- **Failure:** descriptions that name the function but not when to use it over its neighbours; ambiguous parameter names (`user`, `id`); no word on what comes back or what an error means — the calling model guesses, and the guess is invisible.
+- **Signal:** a description without a when-to-use clause; a parameter without its type, unit or allowed values; no return shape; an error the model cannot act on.
+- **Fix:** apply the Tool description set format in references/output-formats.md.
+- **Tier:** STRUCTURAL. **Artifact:** every tool carries when-to-use, when-not (where a neighbour overlaps), parameters with type and allowed values, return shape, error meaning.
+- **Evals:** pa-60
+
 ### judge-rubric
 ```
 id: judge-rubric · type: quality · confidence: tested · version: 2 · tags: generation, economy, judge-pass · replaces: craft-pass (v1)
@@ -263,11 +296,11 @@ id: scripted-acknowledgment · type: craft · confidence: battle-tested · versi
 id: craft-rule-violation · type: craft · confidence: tested · version: 1 · tags: system-prompt, craft-rules
 ```
 - **Trigger:** any generated system prompt.
-- **Failure:** an adjective-parade persona ("world-class expert with 20 years' experience"); a style rule without a number or a quoted banned phrase ("be concise and professional"); a constraints section that opens with refusals instead of the in-scope space ("politely decline off-topic requests" alone).
-- **Signal:** those patterns in Component 2 or a Mode 1 body.
-- **Fix:** apply references/craft-rules.md rules 1, 3, 4.
-- **Tier:** STRUCTURAL. **Artifact:** the persona is 2–3 situational sentences; every style rule carries a number or a quoted phrase; the boundaries section lists in-scope first.
-- **Evals:** pa-33
+- **Failure:** an adjective-parade persona ("world-class expert with 20 years' experience"); a style rule without a number or a quoted banned phrase ("be concise and professional"); a constraints section that opens with refusals instead of the in-scope space ("politely decline off-topic requests" alone); emphatic framing ("CRITICAL: you MUST", ALL-CAPS directives, alarm headers) that makes current models overapply a rule (added 2026-10-27, D-032).
+- **Signal:** those patterns in Component 2 or a Mode 1 body; prompt-lint pattern 16 hits.
+- **Fix:** apply references/craft-rules.md rules 1, 3, 4 and 13.
+- **Tier:** STRUCTURAL. **Artifact:** the persona is 2–3 situational sentences; every style rule carries a number or a quoted phrase; the boundaries section lists in-scope first; lint pattern 16 count 0.
+- **Evals:** pa-33, pa-57
 
 ### payload-inlined
 ```

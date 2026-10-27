@@ -1,6 +1,6 @@
 ---
 name: prompt-architect
-description: Turns requests into deploy-ready AI instruments: optimized prompts, system prompts for Projects/Gems/GPTs, skills, Claude Code handoff briefs, media-generation prompts, and pipeline audits. Fires when the user wants to build, write, improve, audit, fix, port, compare, or merge a prompt, system prompt, project instruction, skill, or AI workflow — e.g. "I need a solution for...", "build me a prompt/assistant/system", "I want this project/prompt to also do X", "edit these instructions so it stops doing Y", "adapt this for a Gem", "which of these prompts is better". Also fires when the requested output will run outside the current chat (another AI tool or model, a Project/Gem/GPT container, Claude Code, an image/video model), when the need is recurring or persistent-assistant-shaped, or when the artifact will be shared for others to use — even if the user never says "prompt". Fires on FLIP plus a build request. NOT for one-time answers consumed in the chat, quick lookups, or doing the underlying task itself.
+description: 'Builds deploy-ready AI instruments: optimized prompts, system prompts for Projects/Gems/GPTs, skills, Claude Code handoff briefs, media prompts, MCP tool descriptions and pipeline audits. Fires when the user wants to build, write, improve, audit, fix, port, compare, or merge a prompt, system prompt, project instruction, skill, or AI workflow — e.g. "I need a solution for...", "build me a prompt/assistant/system", "I want this project/prompt to also do X", "edit these instructions so it stops doing Y", "adapt this for a Gem", "which of these prompts is better". Also fires when the requested output will run outside the current chat (another AI tool or model, a Project/Gem/GPT container, Claude Code, an image/video model), when the need is recurring or persistent-assistant-shaped, or when the artifact will be shared for others to use — even if the user never says "prompt". Fires on FLIP plus a build request. NOT for one-time answers consumed in the chat, quick lookups, or doing the underlying task itself.'
 ---
 
 # Ultimate Prompt Architect
@@ -78,6 +78,7 @@ the solution should be a prompt at all, and where it lives. Terminals:
 - Mode 3 — trigger prompt + custom instructions with direct execution: complex rules applied consistently, no clarification loop
 - Mode 4 — skill: a contextual procedure that auto-triggers on any surface
 - Claude Code Handoff Brief (software builds) · Cowork task brief (heavy agentic knowledge work) · Research-mode prompt (exhaustive synthesis) · Reroute Verdict (an existing tool already does it — build nothing)
+- Tool description set — the descriptions, parameter docs and server instructions a model reads to select and call tools (MCP servers, function definitions); format in output-formats.md
 
 Every deliverable passes the catalog pass before delivery.
 
@@ -179,11 +180,13 @@ Artifact classes: one-shot trigger prompt (Mode 1) · persistent container
 (Mode 2/3 — "who should the AI BE for this whole session") · skill (Mode 4 —
 "how to do X, whenever X comes up", dormant and cost-free otherwise) · Claude
 Code Handoff Brief (multi-file scope, repo work, execution/test loops) ·
-Cowork task brief · Research-mode prompt · Reroute Verdict.
+Cowork task brief · Research-mode prompt · Tool description set · Reroute
+Verdict.
 Litmus: session persona → container; contextual procedure → skill; single
 task → trigger prompt.
 
 - Reroute: a native feature, an installed skill, a session-visible connector, or a search-verified external product that covers the ACTUAL requirement set → build nothing; name the tool and how to start. The existing-solutions probe (protocols §Reroute) runs on every build-class verdict (Mode 2/3 container, Mode 4 skill, Code brief, Cowork brief), never on Mode 1 one-offs, edits / audits / ports, or media payloads; its verdict lands after the interview and before any build; a reroute asserted from memory is invalid.
+- Hook route: a rule that must hold on every Claude Code event, with no judgment involved (always run the linter before a commit, block edits to a folder, notify when a run ends) → a hook in settings.json, built with the update-config skill, not prompt text: a model can skip an instruction, the harness runs a hook every time. A rule that depends on judgment stays in instructions.
 - Payload Placement runs on every container verdict: behavior → instructions; material → knowledge files named in a Component 3 manifest; cross-container procedures → a companion skill; per-session variables → the trigger (protocols §Payload Placement).
 - Design-vs-media: composed design (layout, rendered text, user photos) → Claude Design; pure raster generation or retouching → media-generation payload; hybrid → Design primary with an optional image pre-step (protocols §Design-vs-media).
 - Search-vs-Research: narrow lookups → standard chat with web search; exhaustive synthesis where a missing entry is a defect → Research mode; the Install/Invoke line names the exact toggle state (protocols §Search-vs-Research).
@@ -277,6 +280,14 @@ not run. Any FAIL is repaired before delivery or stated as a one-line
 justification under Known Limitations. New lessons enter the catalog as
 entries with an eval id — never as new numbered checks and never as rules in
 this file.
+
+Self-test (Mode 2/3 system prompts and Mode 4 skills): when a subagent tool
+is available (Claude Code), run the deliverable once in a fresh subagent
+that gets only the deliverable plus two inputs — one normal, one edge taken
+from the ledger — and compare its replies with what the ledger expects. A
+miss is repaired before delivery. Without a subagent tool, one delivery line
+states that the self-test did not run. Mode 1 prompts and briefs skip it
+(catalog: untested-delivery).
 
 ## Feedback loop
 

@@ -122,14 +122,12 @@ Key Optimization Strategy: [Describe how the consultative approach will improve 
 2–3 sentences, no adjective parade]
 
 
-## 🛑 OPERATIONAL PROTOCOL: CONSULTATIVE INTERACTION PATTERN
-
-(You must strictly adhere to this interaction framework)
+## Operational protocol: consultative interaction pattern
 
 
 ### Core Directive
 
-When the user presents a goal related to [INSERT CAPABILITY], **DO NOT execute it immediately.** Instead, conduct a structured interview to gather necessary context.
+When the user presents a goal related to [INSERT CAPABILITY], start with a structured interview instead of executing right away: [INSERT ONE-CLAUSE REASON — e.g. "the right output depends on context only the user has"].
 
 
 ### Phase 1: Initial Understanding
@@ -245,7 +243,7 @@ Key Optimization Strategy: [Describe how embedding rules in system instructions 
 2–3 sentences, no adjective parade]
 
 
-## 🎯 OPERATIONAL PROTOCOL: DIRECT EXECUTION PATTERN
+## Operational protocol: direct execution pattern
 
 
 ### Core Directive
@@ -393,9 +391,16 @@ sole job is to make that interview rich. One fenced block containing:
   re-read this brief and report changed files, evidence, blockers, the
   smallest next diff). A brief missing any of these fields is not
   finished (catalog: unbounded-packet).
-- **Execution rules** — the eight lines below, verbatim; the brief adds a
-  project number where one exists (the spend budget, the file cap) and
-  never removes a line:
+- **Execution rules** — the eight lines below, verbatim, when the brief
+  will run somewhere without the owner's global `~/.claude/CLAUDE.md` (a cloud
+  session, another person's machine, a machine the user reports lacks it). On
+  the owner's own machines that file already carries the same eight rules in
+  "Execution rules (Claude Code)", so the brief carries one line instead —
+  "Execution rules: as in ~/.claude/CLAUDE.md; if that section is missing
+  here, stop and ask for them" — plus any project number (the spend budget,
+  the file cap) as its own line. When the eight lines are included, the
+  brief adds the project numbers and never removes a line (changed
+  2026-10-27, D-032):
   1. Evidence gate: no completion claim without the command output in the
      same message; "tests pass" is the run with its counts. Each change
      gets a positive, a negative and a boundary case, or one line stating
@@ -522,6 +527,32 @@ rename, an inbox sweep) also carries the Code brief's execution rules 1, 2,
 pressure drops first.
 
 Delivery Block as standard.
+
+#### 📝 Output Format for TOOL DESCRIPTION SET
+
+For the text a model reads to select and call tools: MCP tool descriptions,
+server instructions, function definitions. Shape after Anthropic's "Writing
+effective tools for agents" (Sep 2025, read 2026-10-27). One fenced block
+per tool, plus one for the server instructions when the server has them:
+- **Name:** namespaced by service and resource where the server has
+  several (`board_list_tasks`, not `list`).
+- **Description:** what the tool does in one sentence, then when to use it
+  — and when to use its neighbour instead, for every pair a model could
+  confuse — written like onboarding a new teammate: the domain terms
+  defined, nothing assumed.
+- **Parameters:** unambiguous names (`project_id`, not `id`; `user_id`, not
+  `user`), each with type, unit or format, allowed values, default, and
+  where the value comes from ("from list_projects").
+- **Returns:** the fields that come back and which ones matter; a
+  `concise` / `detailed` switch where the full payload is large; pagination
+  or a result cap with its default.
+- **Errors:** each error states what went wrong and what to do next ("project
+  4 not found — call list_projects for valid ids"), never a bare code.
+- **Fewer, broader tools:** a multi-step operation the model would always
+  chain becomes one tool; propose the merge when the supplied set has such a
+  chain.
+Close with 3 realistic multi-step test tasks the user can run against the
+server, each naming the tools a correct run calls.
 
 #### 📝 Payload Spec: MEDIA-GENERATION PROMPTS (Mode 1 subtype)
 

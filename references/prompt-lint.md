@@ -42,6 +42,8 @@ or to the user's own pasted material.
 | 13 | Undefined domain term | Medium | jargon or an acronym the downstream reader may not share | a definition on first use |
 | 14 | Implicit context dependency | High | "the project", "the usual conventions", "as above", "earlier" without an explicit anchor | the thing named ("the conventions in CONTRIBUTING.md §2") |
 | 15 | Missing example for a novel scheme | Medium | a classification, format or term central to the task with neither a definition nor one concrete example in the same body | one example per category, or a definition |
+| 16 | Emphatic framing | High | ALL-CAPS directives (DO NOT, MUST, NEVER, ALWAYS), CRITICAL / IMPORTANT / "strictly adhere" / "non-negotiable" as intensifiers, alarm emoji headers | the plain imperative plus its reason ("Use X when …, because …") — craft rule 13 |
+| 17 | Bare prohibition | Medium | "never X" / "don't X" with no stated alternative where one exists | the positive instruction, keeping the prohibition only when no positive form exists |
 
 ## Procedure
 
