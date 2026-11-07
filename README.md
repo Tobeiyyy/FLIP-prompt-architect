@@ -7,7 +7,7 @@ You describe the goal. The framework decides whether the answer is a one-shot pr
 ## What comes out
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["Your goal,<br>in your own words"] --> B{"Enough<br>to build?"}
     B -- "no" --> C["Interview<br>2–3 questions a round,<br>until 🟢"]
     B -- "yes, or Go" --> D
