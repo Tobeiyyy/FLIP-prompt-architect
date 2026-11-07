@@ -12,21 +12,52 @@ The canonical copy of the framework lives in the author's private vault as a ski
 
 ## Install
 
+The skill is `SKILL.md` plus `references/`. The rest of the repo (`evals/`, `examples/`, this README) is for reading, not installing.
+
+```bash
+git clone https://github.com/Tobeiyyy/FLIP-prompt-architect.git
+```
+
 ### Claude.ai (Skills)
 
-1. Download or clone this repo.
-2. Go to **Settings → Capabilities/Skills** (or the equivalent skills UI).
-3. Upload the folder as a skill (zip it so that `prompt-architect/SKILL.md` and `prompt-architect/references/` sit inside the archive).
+1. Build the zip. The archive must contain a folder named `prompt-architect` (the skill's `name`) with the files inside it, not loose files at the top.
+
+   macOS / Linux:
+
+   ```bash
+   mkdir prompt-architect
+   cp -r FLIP-prompt-architect/SKILL.md FLIP-prompt-architect/references prompt-architect/
+   zip -r prompt-architect.zip prompt-architect
+   ```
+
+   Windows (PowerShell; `tar` ships with Windows 10 and 11):
+
+   ```powershell
+   New-Item -ItemType Directory prompt-architect
+   Copy-Item FLIP-prompt-architect\SKILL.md, FLIP-prompt-architect\references prompt-architect -Recurse
+   tar -a -c -f prompt-architect.zip prompt-architect
+   ```
+
+2. Skills need code execution: **Settings → Capabilities → Code execution and file creation** (called **Create and edit files** in the newer settings layout) must be on.
+3. **Customize → Skills**, click **+**, then **Create skill → Upload a skill**, and pick `prompt-architect.zip`.
 
 ### Claude Code
 
-Copy the folder into your skills directory:
+Copy just the skill into your skills directory:
 
 ```bash
-cp -r FLIP-prompt-architect ~/.claude/skills/prompt-architect
+mkdir -p ~/.claude/skills/prompt-architect
+cp -r FLIP-prompt-architect/SKILL.md FLIP-prompt-architect/references ~/.claude/skills/prompt-architect/
 ```
 
-The skill auto-triggers when you ask to build, write, improve, audit, fix, port, compare, or merge a prompt, system prompt, project instruction, skill, or AI workflow.
+Windows (PowerShell):
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME\.claude\skills\prompt-architect"
+Copy-Item FLIP-prompt-architect\SKILL.md, FLIP-prompt-architect\references "$HOME\.claude\skills\prompt-architect" -Recurse -Force
+```
+
+Run the same commands again to update. The skill auto-triggers when you ask to build, write, improve, audit, fix, port, compare, or merge a prompt, system prompt, project instruction, skill, or AI workflow.
 
 ## Why this exists
 
