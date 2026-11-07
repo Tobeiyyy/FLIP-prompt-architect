@@ -1,8 +1,8 @@
 # Example 5: The interview gets inherited (part 2 of 2)
 
-The assistant in this session was built by the framework in [example 4](04-assistant-build.md). This is that deliverable running in a fresh project with no access to the framework: the interview logic travels inside the deliverable itself.
+The framework built this assistant in [example 4](04-assistant-build.md). Here it runs in a fresh project with no access to the framework, so the interview logic comes from the deliverable alone.
 
-A complete, unedited session. Watch the generated coach run its embedded setup interview with the same discipline it was built under (capped rounds, readiness indicators, a gate before it acts), mine concrete details out of lazy answers, adapt a draft to blunt feedback, and flip personas into a pressuring mock interviewer mid-session without losing the user's profile. Annotations in blockquotes are added for this document.
+A complete, unedited session. The coach runs the setup interview it was built with (capped rounds, readiness indicators, nothing before the gate), gets concrete details out of short answers, reworks a draft after blunt feedback, and turns into a tough mock interviewer without losing the user's profile. The notes in blockquotes were added afterwards.
 
 ---
 
@@ -62,7 +62,7 @@ Here's what I'd recommend: we start in coaching mode and build your pitch first 
 
 Sound good, or would you rather jump straight into mock practice and learn by doing?
 
-> *The gate, inherited: session objective plus a per-area summary before it's allowed to act, exactly as its system prompt requires, the same discipline the framework enforced while building it. Note the last summary line: it flags the missing company intel and commits to marking inferences, which is its "don't fabricate company-specific information" constraint surfacing on its own.*
+> *The inherited gate: a session objective and a summary per area before it may act, as its system prompt requires and as the framework did while building it. The last summary line flags the missing company intel and promises to mark inferences. That's its "don't fabricate company-specific information" constraint, applied without being asked.*
 
 **User:**
 
@@ -98,7 +98,7 @@ A few things to gut-check with you:
 1. Can you give me a rough sense of how much time that dashboard saved? Even a ballpark like "a few hours a week" or "what used to take someone a full day" makes that sentence land much harder.
 2. And the returns error — do you know roughly how long it had been wrong, or what changed once you flagged it? Same idea: one concrete detail turns a good story into a memorable one.
 
-> *Story mining, live: two lazy one-line answers went in, and the coach is pulling for the specifics that make them credible. It doesn't accept "saved a bunch of time" as final material.*
+> *Two lazy one-line answers went in, and the coach asks for the specifics that make them believable. It won't accept "saved a bunch of time" as the final version.*
 
 **User:**
 
@@ -128,7 +128,7 @@ Fair — it's a little grand for a junior role. Let's bring it down to earth:
 
 Simpler, honest, doesn't oversell. Swap that in for the last two sentences and try the whole thing out loud again. Does that ending feel more like something you'd actually say?
 
-> *Co-writing under blunt feedback: three words of critique, and the revision goes simpler instead of defensive. The coach's own instruction is to start from the user's natural language and refine "without making it sound scripted."*
+> *Three words of blunt critique, and the next draft gets simpler instead of defensive. The coach's instructions say to start from the user's natural language and refine "without making it sound scripted."*
 
 **User:**
 
@@ -142,7 +142,7 @@ Thanks for coming in today. We're excited to learn more about you. Let's get sta
 
 Tell me about yourself — what brings you here today?
 
-> *The persona flip: coach warmth off, interviewer on, per the character-break protocol in its system prompt. No re-interview, no setup. The profile from ten messages ago carries straight into the new mode. And it opens on the exact question the user named as their fear, which is what practice is for.*
+> *The coach switches to interviewer, following the character-break protocol in its system prompt. It doesn't re-interview or set anything up again; the profile from ten messages earlier carries into the new mode. It opens with the exact question the user said they feared.*
 
 **User:**
 
@@ -152,4 +152,4 @@ Tell me about yourself — what brings you here today?
 
 Good. You mentioned catching that returns error — walk me through how you found it. What made you look in the first place?
 
-> *The session continues from here. This is where we cut it, and it's the right closing frame: the mock interviewer refusing to accept a thin one-liner about the returns error and pressing for the story behind it. "Don't accept vague answers without pushing," running exactly as written in example 4's system prompt.*
+> *We stop here: the interviewer won't take a one-liner about the returns error and asks for the story. That's the rule "Don't accept vague answers without pushing" from example 4's system prompt, doing its job.*

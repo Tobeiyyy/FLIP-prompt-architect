@@ -1,6 +1,6 @@
 # Example 3: Impossible request → honest refusal with alternatives
 
-A complete, unedited session. The request contains a contradiction the user hasn't noticed: the goal requires the exact capability the constraint forbids. A generator that "just builds" would ship a prompt that silently fails its own success condition. The framework names the contradiction first and pushes back on the *constraint*, not the goal.
+A complete, unedited session. The request contains a contradiction the user hasn't noticed: the goal needs exactly the capability the constraint rules out. A generator that just builds would ship a prompt that quietly can't do what it's for. The framework names the contradiction first and pushes back on the *constraint*, not the goal.
 
 ---
 
@@ -26,16 +26,16 @@ Which direction do you want to go?
 
 ## Why this matters
 
-Three things happened that a naive generator skips:
+Three things a naive generator skips:
 
-1. **The impossibility is named first and plainly** — not buried in a limitations footnote under a prompt that pretends to work.
-2. **The structural reason is given in one breath** — no data access means frozen training weights; no instruction layer overrides that.
-3. **The pushback targets the constraint, not the goal.** The user's goal is legitimate; one of their constraints is the problem. Each alternative keeps a different part of the original request, and the third one leaves prompt territory entirely — because the right artifact class for this job might not be a prompt at all.
+1. **The impossibility is named first and plainly**, not buried in a limitations footnote under a prompt that pretends to work.
+2. **The structural reason is given in one sentence**: without data access the model only has frozen training weights, and no instruction changes that.
+3. **The pushback targets the constraint, not the goal.** The goal is fine; one of the constraints is the problem. Each alternative keeps a different part of the original request, and the third isn't a prompt at all, because the right artifact class for this job might not be one.
 
-Two sibling cases from the same test batch, compressed:
+Two similar cases from the same test batch, shortened:
 
 > **"I want a prompt that makes Claude answer with 100% factual accuracy and never hallucinate, guaranteed."**
-> → *"That's not buildable. No prompt — regardless of sophistication — can guarantee 100% factual accuracy or eliminate hallucination from any LLM... A prompt claiming to deliver that guarantee would itself be a hallucination about the tool's capabilities."* Then: an honest offer to build maximum-reliability epistemic discipline instead, explicitly framed as reduction, not elimination — followed by the standard interview on the reframed goal.
+> → *"That's not buildable. No prompt — regardless of sophistication — can guarantee 100% factual accuracy or eliminate hallucination from any LLM... A prompt claiming to deliver that guarantee would itself be a hallucination about the tool's capabilities."* Then it offers to build maximum-reliability epistemic discipline instead, framed as reduction, not elimination, and runs the standard interview on the reframed goal.
 
 > **"I want one prompt I can share publicly that learns from every conversation people have with it and gets better over time on its own."**
-> → *"The thing you described — a prompt that autonomously accumulates cross-user learnings and self-improves — doesn't exist as an artifact class. Prompts are stateless..."* Then three architecturally honest alternatives (within-session adaptation, a creator-reviewed feedback loop, memory-platform deployment), each explicitly labeled as *not* the requested thing — "none of these is what you described, but one of them might be what you actually need."
+> → *"The thing you described — a prompt that autonomously accumulates cross-user learnings and self-improves — doesn't exist as an artifact class. Prompts are stateless..."* Then three honest alternatives (within-session adaptation, a creator-reviewed feedback loop, memory-platform deployment), each labeled as *not* the requested thing: "none of these is what you described, but one of them might be what you actually need."

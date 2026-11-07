@@ -1,6 +1,6 @@
 # Example 2: Failure report → root-cause repair
 
-A complete, unedited session. The user pastes a deployed prompt and describes a misbehavior, without prescribing a fix. The framework is required to locate and quote the cause in the prompt text before proposing anything, and its fix hierarchy ranks deleting or rewriting the causal instruction above adding protective rules. Annotations in blockquotes are added for this document.
+A complete, unedited session. The user pastes a deployed prompt and describes what it does wrong, without suggesting a fix. The framework has to find and quote the cause in the prompt before proposing anything, and it prefers deleting or rewriting the causing instruction over adding protective rules. The notes in blockquotes were added afterwards.
 
 ---
 
@@ -36,8 +36,8 @@ Always end with a brief summary of key points.
 
 ## Why this matters
 
-> *The first output line is a verdict, not a fix. The framework must classify the cause (causal instruction, ambiguity, internal conflict, or genuine gap) and quote the culprit from the user's own prompt before any edit is allowed. If it can't identify the cause, it has to say so and state its leading hypothesis instead of guessing at a patch.*
+> *The first line of output is a verdict, not a fix. The framework must classify the cause (causal instruction, ambiguity, internal conflict, or genuine gap) and quote the culprit from the user's prompt before it may edit anything. If it can't find the cause, it has to say so and give its leading hypothesis instead of guessing at a patch.*
 
-> *The fix is a deletion, delivered as a labeled REMOVE block with an exact anchor. Most tools would append a rule like "never add summary paragraphs" while the instruction producing summaries survives, leaving the prompt fighting itself. The framework defines that outcome as a failure in its pre-ship checks, even when the added rule would suppress the symptom.*
+> *The fix is a deletion, delivered as a labeled REMOVE block with an exact anchor. Most tools would add a rule like "never add summary paragraphs" and keep the instruction that produces them, so the prompt fights itself. The framework's pre-ship checks count that as a failure, even when the added rule would hide the symptom.*
 
-> *Net result: the prompt got shorter and the misbehavior is structurally gone rather than suppressed. Repairs under this protocol shrink prompts over time instead of layering scar tissue.*
+> *The prompt got shorter, and the misbehavior is removed at its cause instead of suppressed. Repairs like this shrink prompts over time instead of piling up patches.*

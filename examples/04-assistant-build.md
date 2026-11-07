@@ -1,6 +1,6 @@
 # Example 4: Building an assistant (part 1 of 2)
 
-A complete, unedited build session. One sentence in; a two-component persistent assistant out. The deliverable built here is run downstream in [example 5](05-inherited-interview.md), where it conducts its own embedded interview with a user. Annotations in blockquotes are added for this document.
+A complete, unedited build session: one sentence goes in, a two-component persistent assistant comes out. The assistant runs with a user in [example 5](05-inherited-interview.md), where it holds its own embedded interview. The notes in blockquotes were added afterwards.
 
 
 > **Recorded before 2026-10-01.** Since then the framework prints only the artifact plus at most 3 closing lines (where it goes, how to start, assumptions that matter). The mode label, Deployment Header and Delivery Block shown below still guide the work but are no longer printed.
@@ -51,7 +51,7 @@ Ledger — 0 Objective: ✓ a reusable assistant that mock-interviews realistica
 
 🟢 **Ready** — proceeding to build.
 
-> *The coverage ledger before the build: objective stated, one line per category, and a category-5 that names what it scanned rather than a reflex "nothing else needed."*
+> *The coverage ledger before the build: the objective, one line per category, and a category 5 that names what it scanned instead of a reflexive "nothing else needed."*
 
 ---
 
@@ -67,7 +67,7 @@ Ledger — 0 Objective: ✓ a reusable assistant that mock-interviews realistica
 
 **Key Optimization Strategy:** The system prompt enforces a clean persona split — the mock interviewer and the coach are behaviorally distinct, with an explicit character-break protocol so the realistic pressure of mock mode never leaks coaching warmth mid-round, and the constructive debrief never carries interviewer coldness. Special modules for the two specific pain points (pitch and salary) are invocable directly without going through the general flow.
 
-> *Note the reasoning: the mode was chosen because the assistant will need to gather context from its own users every session. The interview pattern is about to be inherited: the SESSION SETUP section below is the framework's own interview logic, rewritten for the coaching domain and embedded in the deliverable.*
+> *The mode was picked because the assistant has to gather context from its own users in every session. The SESSION SETUP section below is the framework's own interview logic, rewritten for coaching and built into the deliverable.*
 
 ---
 

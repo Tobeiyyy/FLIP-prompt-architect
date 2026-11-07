@@ -1,6 +1,6 @@
 # Example 1: Seed idea → interview → deployed prompt
 
-A complete, unedited session. One vague sentence in; a zero-placeholder, paste-and-run deliverable out. Annotations in blockquotes are added for this document — everything else is the raw session.
+A complete, unedited session: one vague sentence goes in, a prompt with zero placeholders that runs on paste comes out. The notes in blockquotes were added afterwards; everything else is the raw session.
 
 
 > **Recorded before 2026-10-01.** Since then the framework prints only the artifact plus at most 3 closing lines (where it goes, how to start, assumptions that matter). The mode label, Deployment Header and Delivery Block shown below still guide the work but are no longer printed.
@@ -25,7 +25,7 @@ I understand you want a prompt that plans weekly meals and generates a consolida
 
 🔴 **Discovery** — Core objective clear (meal plan + grocery list), but household shape, dietary constraints, and planning priorities are all open.
 
-> *Every interview message carries a readiness indicator. The framework cannot generate until the gates to 🟢 are met — or the user says "Go", which skips ahead with assumptions flagged.*
+> *Every interview message shows a readiness indicator. The framework can't build until the gates for 🟢 are met, unless the user says "Go", which skips ahead with assumptions flagged.*
 
 **User:**
 
@@ -58,7 +58,7 @@ That covers it. Let me lock the ledger and build.
 
 🟢 **Ready**
 
-> *The coverage ledger is the gate: the framework must state the objective and summarize every category before it may declare readiness. Note category 5 — it names the dimensions it scanned and the assumptions it took, rather than a reflex "nothing else needed." The user said "protein and fibre rich" without numbers; the framework quantified that into concrete targets (≥150 g / ≥30 g) as a defensible default — and flags both assumptions in the Delivery Block below, where the user can correct them.*
+> *The coverage ledger is the gate: the framework has to state the objective and sum up every category before it can call itself ready. Category 5 names what it scanned and what it assumed instead of a reflexive "nothing else needed." The user said "protein and fibre rich" without numbers, so the framework set concrete defaults (≥150 g / ≥30 g) and flags both assumptions in the Delivery Block below, where the user can correct them.*
 
 ---
 
@@ -133,4 +133,4 @@ Organized by store section: Produce · Protein/Meat · Dairy & Eggs · Grains & 
 **Verify Before Use:**
 - Confirm the 150 g protein / 30 g fiber daily targets feel right for your goals — these are solid defaults for a high-protein diet but worth checking against your actual tracking if you use Hevy or a nutrition app alongside this.
 
-> *One transparency note: the mention of a specific fitness app in the last line comes from the maintainer's account memory — Claude Projects feed known user context into sessions. Your runs won't reference tools you never mentioned. This personalization behavior is documented in the README's limitations.*
+> *The fitness app named in the last line comes from the maintainer's account memory, which Claude Projects feed into sessions. Your runs won't mention tools you never brought up. The README's limitations section covers this.*
