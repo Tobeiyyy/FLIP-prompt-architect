@@ -126,7 +126,7 @@ Completed deployments confirmed that the deployment steps work in every environm
 
 How deliverables behave in use was spot-checked, not fully session-tested. One generated assistant ran full sessions in a clean context and kept every embedded gate; the other test artifacts were checked for format. Checking each deployment is your job by design, so every deliverable has its own "Verify Before Use" section.
 
-[`evals/`](evals/) has a 51-case regression set with locked expected outcomes and a scoring rubric, so you can check any edit for regressions. Every case passed on Sonnet (pa-01 to pa-49 on 2026-09-19, pa-50 and pa-51 on 2026-09-20), using the wording from before names and places were swapped for this repo.
+[`evals/`](evals/) has a 52-case regression set with locked expected outcomes and a scoring rubric, so you can check any edit for regressions. Cases pa-01 to pa-51 passed on Sonnet (pa-01 to pa-49 on 2026-09-19, pa-50 and pa-51 on 2026-09-20), using the wording from before names and places were swapped for this repo.
 
 ## Known limitations
 
