@@ -4,6 +4,36 @@ A Claude skill that turns a rough idea into a deployed AI system. It interviews 
 
 You describe the goal. The framework decides whether the answer is a one-shot prompt, a persistent assistant, a skill, a multi-prompt pipeline, a build brief for a coding agent, or nothing at all because a tool you already have does the job.
 
+## What comes out
+
+```mermaid
+flowchart LR
+    A["Your goal,<br>in your own words"] --> B{"Enough<br>to build?"}
+    B -- "no" --> C["Interview<br>2–3 questions a round,<br>until 🟢"]
+    B -- "yes, or Go" --> D
+    C --> D{"What should it be,<br>and where does it run?"}
+    D --> E["One artifact<br>(table below)"]
+    D --> F["Pipeline<br>several artifacts that<br>hand off to each other"]
+    D --> G["Nothing to build<br>a tool you have<br>already does it"]
+```
+
+| You want | You get | Runs in | Interview built in? |
+|---|---|---|---|
+| One task done well, once or again and again | A one-shot prompt | Any chat | Only when the person running it has to supply details (audience, voice, terms) |
+| An assistant that first has to learn about you or your case | System prompt + trigger prompt | Claude Project, Gem, GPT | Yes, the full interview with its gates |
+| An assistant that applies fixed rules the same way every time | System prompt + trigger prompt | Claude Project, Gem, GPT | No, the rules are already known |
+| A procedure Claude should apply whenever it comes up | A skill | claude.ai, Claude Code | Only when the procedure needs input only you have |
+| Software | A handoff brief for a coding agent | Claude Code with superpowers | Replaced: the brief pre-answers what Claude Code's own brainstorming will ask |
+| Posters, slides, layouts with your photos | A design prompt | Claude Design | As for one-shot prompts |
+| Images or video | A media prompt | An image or video model | As for one-shot prompts |
+| A complete, sourced overview of a topic | A research prompt | Research mode | As for one-shot prompts |
+| A job that runs on its own (every Monday, go through my inbox) | A task brief | Cowork, scheduled tasks | No, it carries a fixed plan and a check for when it is done |
+| Tools a model can call | Tool and parameter descriptions | MCP servers, function definitions | No |
+
+Any artifact can carry the interview. It goes in where the person using the result will lack context the build had, and stays out where nobody is there to answer or the target already asks on its own.
+
+Each route with a real example from the test set: [How it works](docs/how-it-works.md).
+
 ## This repo is a mirror
 
 The canonical copy lives in the author's private vault as a skill folder: `SKILL.md` (always loaded: routing, gates, the catalog pass) plus `references/` (the Interview Engine spec, interview probes, protocols, environment table, craft rules, output formats, prompt lint, the failures catalog, worked examples), loaded on demand. After every framework edit those files are copied here unchanged, and nobody edits this repo directly. Until 2026-09-19 it was one 2,670-line `SKILL.md`; that version is in this repo's history up to commit 0fcfdcf.
