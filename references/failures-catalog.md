@@ -168,11 +168,11 @@ id: render-fitness · type: format · confidence: battle-tested · version: 1 ·
 id: pipeline-contract-integrity · type: structural · confidence: battle-tested · version: 1 · tags: pipeline, scenario-d3
 ```
 - **Trigger:** D3 audits and ground-up pipelines.
-- **Failure:** a handoff contract stated in only one station; a station referencing "the pipeline", "the Blueprint", or another station's internals; stations built before the Blueprint was approved; a D3 fix applied to one side of a broken contract; a 3+-station pipeline delivered without its Runbook.
+- **Failure:** a handoff contract stated in only one station; a station referencing "the pipeline", "the Blueprint", or another station's internals; stations built before the Blueprint was approved; a D3 fix applied to one side of a broken contract; a 3+-station pipeline delivered without its Runbook; a contract in a ground-up Blueprint without its transport line, or a paste transport between stations that all reach the same shared store.
 - **Signal:** the contract block is not verbatim-compatible in both adjacent stations; a cross-station reference inside a station body; no approval turn before the first station.
 - **Fix:** state the contract identically as output spec upstream and input expectation downstream; strip cross-references; hold the approval gate; ship the Runbook with the final station.
 - **Tier:** STRUCTURAL. **Artifact:** the contract block present in both stations (diffable); the Runbook block on the final delivery.
-- **Evals:** pa-10, pa-11
+- **Evals:** pa-10, pa-11, pa-62
 
 ### copy-fence-integrity
 ```

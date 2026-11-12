@@ -672,8 +672,9 @@ Deploy in: [Capability Table row]
 🔗 Interface Contracts
 
 For each handoff, a fenced block specifying the exact format crossing the
-boundary — field names, structure, scales. This block is copied into both
-adjacent stations at build time.
+boundary — field names, structure, scales — and its first line naming the
+transport: `transport: paste | store <name> → <record> | automatic`. This
+block is copied into both adjacent stations at build time.
 
 📦 Payload Ownership
 

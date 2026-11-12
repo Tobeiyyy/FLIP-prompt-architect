@@ -531,7 +531,11 @@ previous station wrote, a script calling the API) — because the user asked
 for the workflow to run without them or the environment already works that
 way. Choosing to automate a stage the user would run by hand does not lower
 the bar. A handoff the user carries by copy-paste or re-upload keeps the bar
-at 2 — each one is manual work on every run (added 2026-10-27, D-031):
+at 2 — each one is manual work on every run (added 2026-10-27, D-031). So
+does a handoff through a shared store — a task board, database or file that
+every station reads and writes through a connector while the user only opens
+the next station: it removes the pasting, not the start of each station
+(added 2026-11-12):
 
 1. **Persona conflict** — Stages require expert personas whose instructions
    would contradict if merged (e.g., free-associating creative observer vs.
@@ -601,7 +605,12 @@ open with "Go" / "Proceed" skip it.
    **payload ownership declaration**: which station holds which knowledge
    files, and which file/data handoffs cross each boundary. "Station 2
    consumes station 1's output plus the exam PDFs" gets written into the
-   contract, never assumed.
+   contract, never assumed. Each contract names its transport: paste, shared
+   store, or automatic. When every station's surface reaches the same store
+   through a connector (verified in-session or named by the user), the store
+   is the transport: the contract names the store, the record and its
+   fields, each station writes and reads that record itself, and paste
+   remains the fallback only for a station that cannot reach the store.
 3. **Approval gate:** Build stations only after the user approves the
    Blueprint ("Go" / "Proceed" / station-by-station confirmation). The user
    may prune, merge, or reorder stations at this gate.
@@ -616,7 +625,8 @@ open with "Go" / "Proceed" skip it.
    in order: each container/project to create, what goes in which field, which
    files upload where (from Payload Ownership); (b) Operating loop: the
    recurring flow in plain steps — which station runs when, and exactly which
-   output line/block gets copied into which station's next session; (c) the
+   output line/block gets copied into which station's next session, or for a
+   store transport which record each station writes and reads; (c) the
    handoff lines listed once, copy-ready. ~15 lines, fenced. The user should
    be able to run the entire pipeline from this block alone without rereading
    the stations.
